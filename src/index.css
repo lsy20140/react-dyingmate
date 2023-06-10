@@ -1,0 +1,86 @@
+/* fonts */
+@font-face {
+  font-family: 'Heymin';
+  font-weight: bold;
+  src: url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Bold.ttf") format('woff2'),
+  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Bold.ttf") format('woff'),
+  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Bold.ttf") format('truetype')
+}
+
+@font-face {
+  font-family: 'Heymin';
+  font-weight: normal;
+  src: url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Regular.ttf") format('woff2'),
+  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Regular.ttf") format('woff'),
+  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Regular.ttf") format('truetype')
+}
+
+body {
+  margin: 0;
+  font-family: 'Heymin', 'Roboto';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* TRACK */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.23);
+}
+
+/* HANDLE */
+::-webkit-scrollbar-thumb {
+  background: white;
+  height: 10%;
+}
+
+
+
+/* ANIMATIONS */
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-150px);
+    filter: blur(5px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
