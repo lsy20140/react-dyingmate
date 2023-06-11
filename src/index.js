@@ -1,15 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { PlayProvider } from './contexts/Play';
+import NotFound from './pages/NotFound';
+import App from './App';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import Splash from './pages/Splash';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App/>,
+    errorElement : <NotFound/>,
+    children: [
+      {index: true, element: <Splash/>},
+      {path: '/main', element: <Main/>},
+      {path: '/signup', element: <SignUp/>},
+      {path: '/login', element: <Login/>},
+    ]
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PlayProvider>
-      <App/>
+      <RouterProvider router={router} />
     </PlayProvider>
     
   </React.StrictMode>
