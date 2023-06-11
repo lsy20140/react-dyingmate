@@ -1,16 +1,18 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { usePlay } from '../contexts/Play';
 import { useFrame } from "@react-three/fiber";
-import { Float, PerspectiveCamera, useScroll } from "@react-three/drei";
+import { Float, PerspectiveCamera, useScroll, Box, MeshReflectorMaterial} from "@react-three/drei";
 import * as THREE from "three";
-import { Euler, Group, Vector3 } from "three";
+import { Group, Vector3, Euler } from "three";
 import { gsap } from "gsap";
 import { House2 } from './models/House2';
 import { MainBackground } from './MainBackground';
+import { House1 } from './models/House1';
+import { Campfire } from './models/Campfire';
 
 
 const LINE_NB_POINTS = 1000;
-const CURVE_DISTANCE = 250;
+const CURVE_DISTANCE = 50;
 const CURVE_AHEAD_CAMERA = 0.008;
 const CURVE_AHEAD_AIRPLANE = 0.02;
 const AIRPLANE_MAX_ANGLE = 35;
@@ -21,13 +23,11 @@ export default function MainExperience() {
   const curvePoints = useMemo(
     () => [
       new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(0, 0, -CURVE_DISTANCE),
-      new THREE.Vector3(100, 0, -2 * CURVE_DISTANCE),
-      new THREE.Vector3(-100, 0, -3 * CURVE_DISTANCE),
-      new THREE.Vector3(100, 0, -4 * CURVE_DISTANCE),
-      new THREE.Vector3(0, 0, -5 * CURVE_DISTANCE),
-      new THREE.Vector3(0, 0, -6 * CURVE_DISTANCE),
-      new THREE.Vector3(0, 0, -7 * CURVE_DISTANCE),
+      new THREE.Vector3(20, 0, -CURVE_DISTANCE),
+      new THREE.Vector3(50, 0, -2 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -3 * CURVE_DISTANCE),
+      new THREE.Vector3(-20, 0, -2 * CURVE_DISTANCE),
+      new THREE.Vector3(-30, 0, 1* CURVE_DISTANCE),
     ],
     []
   );
@@ -40,64 +40,69 @@ export default function MainExperience() {
 
   const houses = useMemo(
     () => [
-      // STARTING
+
+      // // First House - 주인 할머니
+      // {
+      //   scale: new Vector3(20, 20, 20),
+      //   position: new Vector3(
+      //     curvePoints[1].x - 10,
+      //     curvePoints[1].y,
+      //     curvePoints[1].z + 5
+      //   ),
+      // },
+      // Second House - 아저씨
       {
-        position: new Vector3(-3.5, -3.2, -7),
+        scale: new Vector3(15, 15, 15),
+        position: new Vector3(
+          curvePoints[2].x + 8,
+          curvePoints[2].y,
+          curvePoints[2].z + 5
+        ),
+        rotation: new Euler(0, -Math.PI / 2, 0),
       },
 
-      // FIRST POINT
+      // Third House - 20대 여자
       {
-        scale: new Vector3(40, 40, 40),
+        scale: new Vector3(15, 15, 15),
         position: new Vector3(
-          curvePoints[1].x + 10,
-          curvePoints[1].y - 4,
-          curvePoints[1].z + 64
-        ),
-      },
-      // SECOND POINT
-      {
-        scale: new Vector3(30, 30, 30),
-        position: new Vector3(
-          curvePoints[2].x + 6,
-          curvePoints[2].y - 7,
-          curvePoints[2].z + 50
-        ),
-      },
-
-      // THIRD POINT
-      {
-        scale: new Vector3(30, 30, 30),
-        position: new Vector3(
-          curvePoints[3].x + 3,
-          curvePoints[3].y - 10,
-          curvePoints[3].z + 50
+          curvePoints[3].x,
+          curvePoints[3].y,
+          curvePoints[3].z - 5
         ),
       },
 
-      // FOURTH POINT
+      // Fourth House - 사용자의 집
       {
-        scale: new Vector3(20, 20, 20),
+        scale: new Vector3(10, 10, 10),
         position: new Vector3(
-          curvePoints[4].x + 3,
-          curvePoints[4].y - 10,
-          curvePoints[4].z + 2
+          curvePoints[4].x - 4,
+          curvePoints[4].y,
+          curvePoints[4].z + 5
         ),
+        rotation: new Euler(0, Math.PI / 2, 0),
       },
 
-      // FINAL
-      {
-        scale: new Vector3(30, 30, 30),
-        position: new Vector3(
-          curvePoints[7].x + 12,
-          curvePoints[7].y - 5,
-          curvePoints[7].z + 60
-        ),
-        rotation: new Euler(-Math.PI / 4, -Math.PI / 6, 0),
-      },
+      // End - Campfire
+      // {
+      //   scale: new Vector3(15, 15, 15),
+      //   position: new Vector3(
+      //     curvePoints[5].x,
+      //     curvePoints[5].y,
+      //     curvePoints[5].z + 5
+      //   ),
+      // },
 
     ],
     []
   );
+
+  const shape = useMemo(() => {
+    const shape = new THREE.Shape()
+    shape.moveTo(0, -1)
+    shape.lineTo(0, 1)
+
+    return shape
+  }, [curve])
 
   const cameraGroup = useRef();
   const cameraRail = useRef();
@@ -110,7 +115,7 @@ export default function MainExperience() {
   useFrame((_state, delta) => {
     if (window.innerWidth > window.innerHeight) {
       // LANDSCAPE
-      camera.current.fov = 30;
+      camera.current.fov = 42;
       camera.current.position.z = 5;
     } else {
       // PORTRAIT
@@ -228,8 +233,7 @@ export default function MainExperience() {
     airplane.current.quaternion.slerp(targetAirplaneQuaternion, delta * 2);
 
     if (
-      cameraGroup.current.position.z <
-      curvePoints[curvePoints.length - 1].z + 100
+      cameraGroup.current.position.z > CURVE_DISTANCE - 5
     ) {
       setEnd(true);
       planeOutTl.current.play();
@@ -240,8 +244,8 @@ export default function MainExperience() {
 
   const tl = useRef();
   const backgroundColors = useRef({
-    colorA: "#3535cc",
-    colorB: "#abaadd",
+    colorA: "#bcd2e3",
+    colorB: "#ffffff",
   });
 
   const planeInTl = useRef();
@@ -253,17 +257,17 @@ export default function MainExperience() {
     tl.current.to(backgroundColors.current, {
       duration: 1,
       colorA: "#6f35cc",
-      colorB: "#ffad30",
+      colorB: "#8aa6ed",
     });
     tl.current.to(backgroundColors.current, {
       duration: 1,
-      colorA: "#424242",
-      colorB: "#ffcc00",
+      colorA: "#2f167a",
+      colorB: "#2f327d",
     });
     tl.current.to(backgroundColors.current, {
       duration: 1,
-      colorA: "#81318b",
-      colorB: "#55ab8f",
+      colorA: "#001424",
+      colorB: "#0d3352",
     });
 
     tl.current.pause();
@@ -312,31 +316,76 @@ export default function MainExperience() {
   return useMemo(() => (
     <>
       <directionalLight position={[0, 3, 1]} intensity={0.1} />
+      {/* <group position={[0,0,0]}>
+        <mesh>
+          <extrudeGeometry
+            args={[
+              shape, 
+              {
+                steps: LINE_NB_POINTS,
+                bevelEnabled: false,
+                extrudePath: curve,
+              }
+            ]} />
+            <meshStandardMaterial color={"red"} opacity={1} transparent/>
+        </mesh>
+      </group> */}
       <group ref={cameraGroup}>
           <MainBackground backgroundColors={backgroundColors} />
           <group ref={cameraRail}>
             <PerspectiveCamera
               ref={camera}
-              position={[0, 0, 5]}
-              fov={30}
+              position={[0, 3, 5]}
+              fov={42}
               makeDefault
             />
           </group>
           <group ref={airplane}>
               <Float floatIntensity={1} speed={1.5} rotationIntensity={0.5}>
-                <House2
+                {/* <House2
                   rotation-y={Math.PI / 2}
                   scale={[0.2, 0.2, 0.2]}
                   position-y={0.1}
-                />
+                /> */}
               </Float>
           </group>
-        </group>
+      </group>
+      <mesh>
+        <Box scale={[500,10, 500]} />
+        <MeshReflectorMaterial color="red" />
+      </mesh>
+
 
         {/* HOUSES */}
+        <group 
+          position={ new Vector3(
+            curvePoints[1].x - 12,
+            curvePoints[1].y,
+            curvePoints[1].z + 5
+          )}
+          scale={new Vector3(10, 10, 10)}
+          rotation-y={Math.PI / 3}
+
+        >
+          <House1 />
+        </group>
+
         {houses.map((house, index) => (
           <House2 sceneOpacity={sceneOpacity} {...house} key={index} />
         ))}
+
+        <group
+          position={new Vector3(
+            curvePoints[5].x,
+            curvePoints[5].y,
+            curvePoints[5].z + 5
+          )}
+          scale={new Vector3(1,1,1)}
+          rotation-y={Math.PI / 2}
+        >
+          <pointLight positon={curvePoints[5]} intensity={2} />
+          <Campfire />
+        </group>
     </>
   )
   )
