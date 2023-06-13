@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { usePlay } from '../contexts/Play';
 import { useFrame } from "@react-three/fiber";
-import { Float, PerspectiveCamera, useScroll, Box, MeshReflectorMaterial} from "@react-three/drei";
+import { Float, PerspectiveCamera, useScroll, OrbitControls} from "@react-three/drei";
 import * as THREE from "three";
 import { Group, Vector3, Euler } from "three";
 import { gsap } from "gsap";
@@ -9,6 +9,7 @@ import { House2 } from './models/House2';
 import { MainBackground } from './MainBackground';
 import { House1 } from './models/House1';
 import { Campfire } from './models/Campfire';
+import { Cemetery } from './models/Cemetry';
 
 
 const LINE_NB_POINTS = 1000;
@@ -244,8 +245,8 @@ export default function MainExperience() {
 
   const tl = useRef();
   const backgroundColors = useRef({
-    colorA: "#bcd2e3",
-    colorB: "#ffffff",
+    colorA: "#79a9d0",
+    colorB: "#ffbd76",
   });
 
   const planeInTl = useRef();
@@ -255,7 +256,7 @@ export default function MainExperience() {
     tl.current = gsap.timeline();
 
     tl.current.to(backgroundColors.current, {
-      duration: 1,
+      duration: 100,
       colorA: "#6f35cc",
       colorB: "#8aa6ed",
     });
@@ -335,7 +336,7 @@ export default function MainExperience() {
           <group ref={cameraRail}>
             <PerspectiveCamera
               ref={camera}
-              position={[0, 3, 5]}
+              position={[0, 3, 0]}
               fov={42}
               makeDefault
             />
@@ -350,42 +351,43 @@ export default function MainExperience() {
               </Float>
           </group>
       </group>
-      <mesh>
-        <Box scale={[500,10, 500]} />
-        <MeshReflectorMaterial color="red" />
-      </mesh>
+      <group position={[0,-17,0]}>
+        <Cemetery/> 
+      </group>
+      
+
+      {/* HOUSES */}
+      <group 
+        position={ new Vector3(
+          curvePoints[1].x - 12,
+          curvePoints[1].y,
+          curvePoints[1].z + 5
+        )}
+        scale={new Vector3(10, 10, 10)}
+        rotation-y={Math.PI / 3}
+
+      >
+        <House1 />
+      </group>
+
+      {houses.map((house, index) => (
+        <House2 sceneOpacity={sceneOpacity} {...house} key={index} />
+      ))}
 
 
-        {/* HOUSES */}
-        <group 
-          position={ new Vector3(
-            curvePoints[1].x - 12,
-            curvePoints[1].y,
-            curvePoints[1].z + 5
-          )}
-          scale={new Vector3(10, 10, 10)}
-          rotation-y={Math.PI / 3}
 
-        >
-          <House1 />
-        </group>
-
-        {houses.map((house, index) => (
-          <House2 sceneOpacity={sceneOpacity} {...house} key={index} />
-        ))}
-
-        <group
-          position={new Vector3(
-            curvePoints[5].x,
-            curvePoints[5].y,
-            curvePoints[5].z + 5
-          )}
-          scale={new Vector3(1,1,1)}
-          rotation-y={Math.PI / 2}
-        >
-          <pointLight positon={curvePoints[5]} intensity={2} />
-          <Campfire />
-        </group>
+      <group
+        position={new Vector3(
+          curvePoints[5].x,
+          curvePoints[5].y,
+          curvePoints[5].z + 5
+        )}
+        scale={new Vector3(1,1,1)}
+        rotation-y={Math.PI / 2}
+      >
+        <pointLight positon={curvePoints[5]} intensity={2} />
+        <Campfire />
+      </group>
     </>
   )
   )
