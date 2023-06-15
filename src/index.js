@@ -5,11 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { PlayProvider } from './contexts/Play';
 import NotFound from './pages/NotFound';
-import App from './App';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
 import Main from './pages/Main';
 import Splash from './pages/Splash';
+import App from './App';
+import LoginSignup from './pages/LoginSignup';
 
 const router = createBrowserRouter([
   {
@@ -17,10 +16,9 @@ const router = createBrowserRouter([
     element: <App/>,
     errorElement : <NotFound/>,
     children: [
-      {index: true, element: <Splash/>},
+      {index: true, element: <Main/>},
       {path: '/main', element: <Main/>},
-      {path: '/signup', element: <SignUp/>},
-      {path: '/login', element: <Login/>},
+      {path: '/login', element: <LoginSignup/>},
     ]
   }
 ])

@@ -1,4 +1,4 @@
-import { Environment, Sphere, Box, MeshReflectorMaterial } from "@react-three/drei";
+import { Environment, Sphere } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Gradient, LayerMaterial } from "lamina";
 import { useRef } from "react";
@@ -7,7 +7,7 @@ import * as THREE from "three";
 
 export const MainBackground = ({ backgroundColors }) => {
   const start = 0.2;
-  const end = -0.5;
+  const end = 0;
 
   const gradientRef = useRef();
   const gradientEnvRef = useRef();
@@ -45,6 +45,8 @@ export const MainBackground = ({ backgroundColors }) => {
           </LayerMaterial>
         </Sphere>
       </Environment>
+      
+
     </>
   );
 };

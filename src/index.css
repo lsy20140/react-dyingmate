@@ -19,9 +19,11 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
+	font-size: 16px;
 	font: inherit;
 	vertical-align: baseline;
+  list-style: none;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -47,37 +49,33 @@ table {
 	border-spacing: 0;
 }
 
-input, button{
-  font-family: 'Heymin';
-}
-
-/* fonts */
-@font-face {
-  font-family: 'Heymin';
-  font-weight: bold;
-  src: url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Bold.ttf") format('woff2'),
-  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Bold.ttf") format('woff'),
-  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Bold.ttf") format('truetype')
-}
-
-@font-face {
-  font-family: 'Heymin';
-  font-weight: normal;
-  src: url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Regular.ttf") format('woff2'),
-  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Regular.ttf") format('woff'),
-  url("../src/assets/fonts/IM_HYEMIN/IM_Hyemin-Regular.ttf") format('truetype')
-}
 
 body {
   margin: 0;
-  font-family: 'Heymin', 'Roboto';
+  font-family: 'Pretendard';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+
 }
 
 #root {
   width: 100%;
   height: 100vh;
+}
+
+input {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+input, button {
+  font-size: 16px;
+  font-family: 'Pretendard';
+
 }
 
 ::-webkit-scrollbar {
@@ -107,12 +105,9 @@ body {
 
 /* login header */
 .header {
-  font-family: "Heymin";
-  font-weight: bold;
   color: #629556;
   font-size: 3rem;
 }
-
 
 
 /* ANIMATIONS */

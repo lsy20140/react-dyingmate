@@ -4,7 +4,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-
+  font-family: Pretendard;
 }
 
 .overlay--disable {
@@ -27,12 +27,12 @@
 
 .intro {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  height: 100%;
-}
+  justify-content: space-between;
+  align-items: center;
+  gap: 5rem;
 
+}
 
 
 .intro--disappear .title {
@@ -41,16 +41,24 @@
   transform-origin: center top;
 }
 
+.intro__icon{
+  width: 3rem;
+  height: 3rem;
+}
+
 
 .intro__scroll {
-  opacity: 0;
   color: white;
-  font-family: "Inter", sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
+  opacity: 0;
+  font-size: 2rem;
+  font-weight: bold;
   position: absolute;
-  top: 24vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
+
 
 .intro--disappear .intro__scroll {
   animation: fadeIn 1s ease-in-out 1.5s forwards;
@@ -60,30 +68,6 @@
   animation: fadeOut 1s ease-in-out forwards;
 }
 
-/* 
-.start:hover:before {
-  width: 200%;
-  height: 300%;
-  border-radius: 100%;
-}
-
-.start:before {
-  content: "";
-  background: #3535cc;
-  position: absolute;
-  width: 0%;
-  bottom: 0;
-  left: 50%;
-  height: 0%;
-  transition: 0.42s ease-in-out;
-  z-index: -1;
-  transform: translateX(-50%) translateY(50%);
-}
-*/
-.intro--disappear .start {
-  animation: fadeOut 1s ease-in-out forwards;
-} 
-
 .outro {
   position: absolute;
   top: 0;
@@ -91,6 +75,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;

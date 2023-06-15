@@ -14,7 +14,7 @@ export default function Splash() {
   }
 
   return (
-    <div className={`overlay ${goLogin ? "overlay--disable" : ""}`}>
+    <div className={`overlay ${goLogin ? "overlay--disable" : ""}`} >
       <div className={`splash ${goLogin ? "splash--disappear" : ""}`}>
         <h1 className="title">
           Dying Mate

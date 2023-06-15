@@ -1,11 +1,16 @@
 import { useProgress } from "@react-three/drei";
 import { usePlay } from "../contexts/Play";
 import '../styles/overlay.css'
-import Login from "./Login";
+import { useEffect } from "react";
+import scrolling from '../assets/img/scrolling.png'
 
 export const Overlay = () => {
   const { progress } = useProgress();
   const { play, end, setPlay, hasScroll } = usePlay();
+
+  useEffect(() => 
+    setPlay(true)
+  )
 
   return (
     <div
@@ -17,20 +22,15 @@ export const Overlay = () => {
       />
       {progress === 100 && (
         <div className={`intro ${play ? "intro--disappear" : ""}`}>
-          <p className="intro__scroll">스크롤하여 이동해보세요</p>
-          <p
-            className="start"
-            onClick={() => {
-              setPlay(true);
-            }}
-
-          >
-            시작하기
-          </p>
+          <div className="intro__scroll">
+            <img src={scrolling} />
+            <p>스크롤을 통해 앞뒤로 이동해보세요</p>
+          </div>
         </div>
       )}
       <div className={`outro ${end ? "outro--appear" : ""}`}>
         <p className="outro__text">Finish</p>
+        {/* <p className="outro__text">🔁메인으로 돌아가기</p> */}
       </div>
     </div>
   );
