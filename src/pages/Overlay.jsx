@@ -37,7 +37,6 @@ export const Overlay = () => {
 
 // styled-components
 const GuideText = styled.div`
-  width: 50%;
   padding: 0.75rem 0;
   font-size: 1.25rem;
   background-image:
