@@ -26,9 +26,10 @@
 }
 
 .intro {
+  height: 100%;
   display: flex;
+  justify-content: flex-end;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   gap: 5rem;
 
@@ -48,14 +49,14 @@
 
 
 .intro__scroll {
-  color: white;
+  width: 100%;
+  text-align: center;
   opacity: 0;
-  font-size: 2rem;
-  font-weight: bold;
   position: absolute;
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10rem;
   gap: 1.5rem;
 }
 

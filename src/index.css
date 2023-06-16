@@ -32,6 +32,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+  color: #535353;
 }
 ol, ul {
 	list-style: none;
@@ -60,7 +61,7 @@ body {
 }
 
 #root {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -93,16 +94,6 @@ input, button {
   height: 10%;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 8rem;
-  gap: 6rem;
-  animation: fadeIn 1.5s ease-out;
-
-}
-
 /* login header */
 .header {
   color: #629556;
@@ -114,19 +105,18 @@ input, button {
 
 @keyframes fadeInDown {
   0% {
-    opacity: 0;
-    transform: translateY(-150px);
-    filter: blur(5px);
+    transform: none;
   }
 
   100% {
-    opacity: 1;
-    filter: none;
+    transform: translateX(-50%);
+    
   }
 }
 
 @keyframes fadeIn {
   0% {
+    animation-duration: 3s;
     opacity: 0;
   }
 
