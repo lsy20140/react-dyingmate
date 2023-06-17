@@ -9,6 +9,7 @@ import Main from './pages/Main';
 import Splash from './pages/Splash';
 import App from './App';
 import LoginSignup from './pages/LoginSignup';
+import Room from './pages/Room';
 
 const router = createBrowserRouter([
   {
@@ -16,9 +17,11 @@ const router = createBrowserRouter([
     element: <App/>,
     errorElement : <NotFound/>,
     children: [
-      {index: true, element: <Splash/>},
+      {index: true, element: <Main/>},
       {path: '/main', element: <Main/>},
       {path: '/login', element: <LoginSignup/>},
+      {path: '/room', element: <Room/>},
+
     ]
   }
 ])

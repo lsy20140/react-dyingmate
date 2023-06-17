@@ -9,7 +9,8 @@ import { House2 } from './models/House2';
 import { MainBackground } from './MainBackground';
 import { House1 } from './models/House1';
 import { Campfire } from './models/Campfire';
-import { Cemetery } from './models/Cemetry';
+import { Path } from './models/Path';
+import { Ground } from './models/Ground';
 
 
 const LINE_NB_POINTS = 1000;
@@ -116,7 +117,7 @@ export default function MainExperience() {
   useFrame((_state, delta) => {
     if (window.innerWidth > window.innerHeight) {
       // LANDSCAPE
-      camera.current.fov = 42;
+      camera.current.fov =40 ;
       camera.current.position.z = 5;
     } else {
       // PORTRAIT
@@ -337,7 +338,7 @@ export default function MainExperience() {
             <PerspectiveCamera
               ref={camera}
               position={[0, 3, 0]}
-              fov={42}
+              fov={40}
               makeDefault
             />
           </group>
@@ -351,8 +352,8 @@ export default function MainExperience() {
               </Float>
           </group>
       </group>
-      <group position={[0,-17,0]}>
-        <Cemetery/> 
+      <group position={[0,10,0]} >
+        <Ground/>
       </group>
       
 
@@ -385,7 +386,7 @@ export default function MainExperience() {
         scale={new Vector3(1,1,1)}
         rotation-y={Math.PI / 2}
       >
-        <pointLight positon={curvePoints[5]} intensity={2} />
+        <pointLight positon={curvePoints[5]} intensity={0.5} />
         <Campfire />
       </group>
     </>
