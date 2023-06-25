@@ -21,8 +21,10 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 16px;
 	font: inherit;
-	vertical-align: baseline;
+	vertical-align: middle;
   list-style: none;
+  line-height: 150%;
+
 
 }
 /* HTML5 display-role reset for older browsers */
@@ -31,7 +33,6 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
   color: #535353;
 }
 ol, ul {
@@ -52,17 +53,22 @@ table {
 
 
 body {
+  width: 100vw;
   margin: 0;
   font-family: 'Pretendard';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-
 }
 
 #root {
   width: 100vw;
   height: 100vh;
+  
+  /* color variable */
+  --main-color: #FD835F;
+  --font-gray-1: #9E9E9E;
+  --font-gray-3: #535353;
+
 }
 
 input {

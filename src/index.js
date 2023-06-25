@@ -9,6 +9,7 @@ import Main from './pages/Main';
 import Splash from './pages/Splash';
 import App from './App';
 import LoginSignup from './pages/LoginSignup';
+import Onboarding from './pages/Onboarding';
 // import Room from './pages/Room';
 // import Test from './pages/Test';
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       {index: true, element: <Splash/>},
       {path: '/main', element: <Main/>},
       {path: '/login', element: <LoginSignup/>},
+      {path: '/onboarding', element: <Onboarding/>},
       // {path: '/room', element: <Room/>},
       // {path: '/gmroom', element: <Test/>},
 
