@@ -18,11 +18,6 @@ export default function LoginSignup() {
     setCurIdx(idx);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate('/main')
-  }
-
   useEffect(() => {
     console.log(curIdx)
   })
