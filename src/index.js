@@ -10,8 +10,9 @@ import Splash from './pages/Splash';
 import App from './App';
 import LoginSignup from './pages/LoginSignup';
 import Onboarding from './pages/Onboarding';
-// import Room from './pages/Room';
-// import Test from './pages/Test';
+import PlayerRoom from './pages/PlayerRoom';
+import BucketList from './pages/BucketList';
+import Test from './pages/Test';
 
 const router = createBrowserRouter([
   {
@@ -19,12 +20,14 @@ const router = createBrowserRouter([
     element: <App/>,
     errorElement : <NotFound/>,
     children: [
-      {index: true, element: <Splash/>},
+      {index: true, element: <PlayerRoom/>},
       {path: '/main', element: <Main/>},
       {path: '/login', element: <LoginSignup/>},
       {path: '/onboarding', element: <Onboarding/>},
-      // {path: '/room', element: <Room/>},
-      // {path: '/gmroom', element: <Test/>},
+      {path: '/playerroom', element: <PlayerRoom/>},
+      {path: '/bucketlist', element: <BucketList/>},
+      {path: '/test', element: <Test/>}
+
 
     ]
   }
