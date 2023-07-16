@@ -10,7 +10,7 @@ export function WillPaper(props) {
   const { nodes, materials } = useGLTF('/models/5_6_Will.gltf')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Will.geometry} material={materials['Material.008']} position={[9.476, 5.041-7.345, -5.365]} rotation={[-Math.PI, 1.484, -Math.PI]} scale={[0.856, 0.016, 1.201]} >
+      <mesh geometry={nodes.Will.geometry} material={materials['Material.008']} position={[9.476, 5.041, -5.365]} rotation={[-Math.PI, 1.484, -Math.PI]} scale={[0.856, 0.016, 1.201]} >
         <meshBasicMaterial attach="material" color={"red"} />
       </mesh>
     </group>

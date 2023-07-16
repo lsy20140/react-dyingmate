@@ -10,7 +10,7 @@ export function Board(props) {
   const { nodes, materials } = useGLTF('/models/5_3_Board.gltf')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Board.geometry} material={materials['Material.006']} position={[-2.157, 3, -14.139]} rotation={[0, 0, -Math.PI]} scale={[-3.307, -3.108, -0.163]}>
+      <mesh geometry={nodes.Board.geometry} material={materials['Material.006']} position={[-2.157, 3+6, -14.139]} rotation={[0, 0, -Math.PI]} scale={[-3.307, -3.108, -0.163]}>
         <meshBasicMaterial attach="material" color={"red"} />
       </mesh>
     </group>

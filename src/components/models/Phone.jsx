@@ -10,7 +10,7 @@ export function Phone(props) {
   const { nodes, materials } = useGLTF('/models/5_4_Phone.gltf')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Phone.geometry} material={materials['Material.008']} position={[-4.061, 5.463-7.345, 11.349]} rotation={[0, -0.179, 0]} scale={[0.349, 0.114, 0.569]} >
+      <mesh geometry={nodes.Phone.geometry} material={materials['Material.008']} position={[-4.061, 5.463, 11.349]} rotation={[0, -0.179, 0]} scale={[0.349, 0.114, 0.569]} >
         <meshBasicMaterial attach="material" color={"red"} />
       </mesh>
     </group>
