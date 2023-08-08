@@ -35,6 +35,7 @@ export default function LoginSignup() {
           <LoginForm />
         ) : <SignUpForm/>}
       </FormBox>
+
     </>
 
   )
@@ -44,11 +45,13 @@ export default function LoginSignup() {
 const FormBox = styled.div`
   width: 30rem;
   padding: 4rem 3.5rem;
-  background-color: white;
+  background: linear-gradient(223deg, rgba(0, 0, 0, 0.51) 0%, rgba(0, 0, 0, 0.12) 100%);
+  outline: solid 2px white;
+  border-radius: 2.5rem;  
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border-radius: 1.25rem;
+
   label{
     margin-left: 1rem;
   }
@@ -60,19 +63,19 @@ const FormBox = styled.div`
 const TabWrapper = styled.div`
   width: 100%;
   display: flex;
-  gap: 1rem;
-  color: #CCCCCC;
-  font-weight: bold;
+  gap: 0.8rem;
   margin-bottom: 1.5rem;
   li {
     cursor: pointer;
     padding: 0px 6px;
+    color: #DEDEDE;
+    font-size: 1.25rem;
   }
 
   li.selected{
+    font-weight: 500;
     border-bottom: 2px solid red;
-    padding-bottom: 6px;
-    color: #535353;
+    color: white;
   }
 `;
 

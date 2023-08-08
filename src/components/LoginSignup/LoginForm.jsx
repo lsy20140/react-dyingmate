@@ -75,11 +75,10 @@ const PasswordInput = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  verticle-align: middle;
   img {
     height: 1rem;
     width: 1rem;
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     padding: 0.5rem;
     position: absolute;
     right: 0.5rem;
@@ -93,7 +92,7 @@ const FormInput = styled.input`
   border-radius: 20px;
   width: 100%;
   height: 3rem;
-  color: var(--font-gray-1);
+  color: black;
   background-color: #F3F3F3;
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
@@ -111,15 +110,16 @@ const SocialLogin = styled.div`
     display: flex;
     margin-top: 2rem;
     text-align: center;
-    color: black;
+    color: white;
     margin-bottom: 1.25rem;
+    
   }
 
   p:before,
   p:after {
       content: "  ";
       flex: 1 1;
-      border-bottom: 1px solid #CBCBCB;
+      border-bottom: 1px solid white;
       margin: auto;
 
   }
@@ -129,6 +129,7 @@ const SocialLogin = styled.div`
 
   p:after {
     margin-left: 1.25rem;
+
   }
 
 `
@@ -144,8 +145,9 @@ const FindInfoText = styled.p`
   display: flex;
   justify-content: flex-end;
   font-size: 0.9rem;
-  text-decoration:underline;
-  color: #7E8489;
+  color: white;
+  font-weight: 300;
+
 `
 
 

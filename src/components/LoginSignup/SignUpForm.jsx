@@ -104,7 +104,7 @@ const FormInput = styled.input`
   border-radius: 20px;
   width: 100%;
   height: 3rem;
-  color: var(--font-gray-1);
+  color: black;
   background-color: #F3F3F3;
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
@@ -122,7 +122,7 @@ const SocialLogin = styled.div`
     display: flex;
     margin-top: 2rem;
     text-align: center;
-    color: black;
+    color: white;
     margin-bottom: 1.25rem;
   }
 

@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import background from '../assets/img/background.jpg'
+import splashBg from '../assets/img/splashBg.jpg'
+
+splashBg
 import title from '../assets/img/title.png'
 import styled from 'styled-components'
 import LoginSignup from './LoginSignup'
+import { ReactComponent as IconSetting } from '../assets/icons/setting_icon.svg'
 
 export default function Splash() {
 
   return (
     <>
+      <Header>
+        <IconSetting/>
+      </Header>
       <SplashContainer>
         <ContentBox>
           <Description>
@@ -18,9 +25,9 @@ export default function Splash() {
           </Description>
           <LoginSignup/>
         </ContentBox>
-
-
       </SplashContainer>
+
+      
 
     </>
   )
@@ -29,24 +36,32 @@ export default function Splash() {
 
 // styled-components
 
+const Header = styled.div`
+  position: absolute;
+  top: 3.75rem;
+  right: 3rem;
+
+`
+
 const SplashContainer = styled.div`
   width: 100%;
-  height: 100vh;
-  background-image: url(${background});
+  height: 100%;
+   background-image: url(${splashBg});
+  background-color: #FFF9F0;
   background-size: cover;
   display: flex;
-  justify-content: center;
 `
 const ContentBox = styled.div`  
-  height: fit-content;
   display: flex;
   gap: 16rem;
+  margin: auto;
   margin-top: 15rem;
 `
 
 const Description = styled.div`
-  margin-top: 4rem;
+  margin-top: 8rem;
   transform: translateX(75%);
+  justify-align: top;
 
   img{
     animation: fadeIn 2s, fadeInDown 1.5s 1s ease-in-out;
@@ -62,34 +77,6 @@ const Description = styled.div`
     animation-fill-mode: forwards;
   }
 `
-// const Background = styled.img`
-//   width: 100%;
-//   height: 100vh;
-// `
-
-// const Container = styled.div`
-//   width: 100%;
-//   position: absolute;
-//   display: flex;
-//   justify-content: center;
-//   margin-top: 18rem;
-// `
-
-// const LeftContainer = styled.div`
-//   img {
-//     animation: fadeInDown 1.5s 1.5s ease-in-out, fadeIn 2s;
-//     animation-fill-mode: forwards;
-//   }
-//   p{
-//     transform: translateX(-40%);
-//     color: white;
-//     line-height: 2;
-//     opacity: 0;
-//     animation: fadeIn 1.5s 2.5s;
-//     animation-fill-mode: forwards;
-//   }
-
-// `
 
 
 
