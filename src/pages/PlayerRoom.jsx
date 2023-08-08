@@ -1,24 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {useNavigate} from 'react-router-dom'
 import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from 'three'
-import { SpotLightHelper, DirectionalLightHelper } from "three";
-import {OrbitControls, PerspectiveCamera, useHelper} from "@react-three/drei";
-import { Board } from '../components/models/Board';
+import { DirectionalLightHelper } from "three";
+import { useHelper} from "@react-three/drei";
 import { CameraControls } from '../Camera';
 import { Diary } from '../components/models/Diary';
 import { Phone } from '../components/models/Phone';
 import { WillPaper } from '../components/models/WillPaper';
 import { Room } from '../components/models/PlayerRoom/Room';
 import { usePlay } from '../contexts/Play';
-import StartModal from '../components/PlayerRoom/StartModal';
 import { BoardForLightingmap } from '../components/models/PlayerRoom/BoardForLightingmap';
+import ModalOverlay from '../components/PlayerRoom/ModalOverlay';
+import kakao_icon from '../assets/icons/kakao_icon.png'
+import styled from 'styled-components';
+import { Shelf } from '../components/models/Shelf';
+import { Desktop } from '../components/models/Desktop';
+import FriendListModal from '../components/PlayerRoom/FriendListModal';
+
+
 
 export default function PlayerRoom() {
   const light1 = useRef()
   const light2 = useRef()
 
   const {focus, setFocus} = usePlay();
+  const {friendList, setFriendList} = usePlay();
 
   const boardRef = useRef();
 
@@ -51,23 +56,33 @@ export default function PlayerRoom() {
     } else if ( idx === 4) {
       position = { x: 10, y: 3, z: 5 };
       target = { x: 5, y: 0, z: 5 };
+    } else if ( idx ===5) {
+      position = { x: 50, y: 3, z: 5 };
+      target = { x: 5, y: 0, z: 5 };
+    } else if ( idx ===6) {
+      position = { x: -10, y: 3, z: 5 };
+      target = { x: 5, y: 0, z: 5 };
     }
     if(curIdx === idx) {
       setCamera()
     }
 
-    setPosition(position)
-    setTarget(target)
+    if(idx!==10){
+      setPosition(position)
+      setTarget(target)
+    }
+
   }
 
   useEffect(() => {
-    if(curIdx !== 0) {
+    if(curIdx !== 0 && curIdx !==10) {
       const delayFunc = setTimeout(() => {
         setFocus(true)
       }, 2500)
 
       return () => clearTimeout(delayFunc)
     }
+    console.log(position, target)
   },[curIdx])
 
   const LightHelper = () => {
@@ -92,23 +107,41 @@ export default function PlayerRoom() {
           <group onClick={() => handleClick(1)}>
             <WillPaper/>
           </group>
-          <group onClick={() => handleClick(4)}>
-            <Diary/>
+          <group ref={boardRef} onClick={() => handleClick(2)}>
+            <BoardForLightingmap/>
           </group>
           <group onClick={() => handleClick(3)}>
             <Phone/>
           </group>
-          <group ref={boardRef} onClick={() => handleClick(2)}>
-            {/* <Board/> */}
-            <BoardForLightingmap/>
+          <group onClick={() => handleClick(4)}>
+            <Diary/>
+          </group>
+          <group onClick={() => handleClick(5)}>
+            <Shelf/>
+          </group>
+          <group onClick={() => handleClick(6)}>
+            <Desktop/>
           </group>
         </group>
       </Canvas>
       {/* <Will/> */}
-      { focus && <StartModal setCamera={setCamera} curIdx={curIdx} />}
+      { focus && <ModalOverlay setCamera={setCamera} curIdx={curIdx} />}
+
+
+      <div onClick={() => {handleClick(10); setFriendList(true)}}>
+        <FriendListButton src={kakao_icon}/>
+      </div>
+
+      { friendList && <FriendListModal/> }
+
     </>
 
   )
 }
 
-// 보드, 다이어리, 종이(유언장), 핸드폰, 신문, 
+const FriendListButton = styled.img`
+  width: 5rem;
+  height: 5rem;
+  z-index:999;
+
+`
