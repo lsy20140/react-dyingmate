@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { usePlay } from '../../contexts/Play';
+import { ReactComponent as CloseModal } from '../../assets/icons/close_modal.svg'
+import title from '../../assets/img/title.png'
 
 import Will from '../PlayerRoom/MainModalContent/Will'
 import Phone from '../PlayerRoom/MainModalContent/Phone'
@@ -14,10 +16,8 @@ export default function ModalOverlay({curIdx, setCamera}) {
   const [comp, setComp] = useState()
 
   const handleClick = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
-      setFocus(false)
-      setCamera()
-    }
+    setFocus(false)
+    setCamera()
   };
 
   useEffect(() => {
@@ -35,14 +35,16 @@ export default function ModalOverlay({curIdx, setCamera}) {
         setComp(<Diary/>)
         break;
     }
-    window.addEventListener('mousedown', handleClick);
-    return () => window.removeEventListener('mousedown', handleClick);
   },[]);
   
 
   return (
     <>
       <Overlay>
+        <Header>
+          <img src={title} />
+          <CloseModal onClick={handleClick}/>
+        </Header>
         <div ref={modalRef}>
           {comp}
         </div>
@@ -64,5 +66,15 @@ const Overlay = styled.div`
 
   &{
     z-index: 999;
+  }
+`
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 3.75rem 6.25rem;
+
+  img{
+    width: 11.25rem;
   }
 `
