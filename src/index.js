@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './fonts/Font.css'
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { PlayProvider } from './contexts/Play';
@@ -12,7 +13,7 @@ import LoginSignup from './pages/LoginSignup';
 import Onboarding from './pages/Onboarding';
 import PlayerRoom from './pages/PlayerRoom';
 import BucketList from './pages/BucketList';
-import Test from './pages/Test';
+import Auth from './pages/Auth';
 
 const router = createBrowserRouter([
   {
@@ -21,14 +22,13 @@ const router = createBrowserRouter([
     errorElement : <NotFound/>,
     children: [
       {index: true, element: <PlayerRoom/>},
+      {path: '/splash', element: <Splash/>},
       {path: '/main', element: <Main/>},
       {path: '/login', element: <LoginSignup/>},
       {path: '/onboarding', element: <Onboarding/>},
       {path: '/playerroom', element: <PlayerRoom/>},
       {path: '/bucketlist', element: <BucketList/>},
-      {path: '/test', element: <Test/>}
-
-
+      {path: '/auth', element: <Auth/>}
     ]
   }
 ])
