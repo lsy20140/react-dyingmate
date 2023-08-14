@@ -37,6 +37,7 @@ export default function Will() {
               value={content ?? ''}
               onChange={handleChange}
               placeholder='내용을 입력해주세요.' 
+              spellcheck="false"
               required
             />
             <StyledButton text={"완료하기"} btnColor={`var(--main-color)`} />
