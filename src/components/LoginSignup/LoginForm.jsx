@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components';
 import google_icon from '../../assets/icons/google_icon.png'
@@ -10,6 +10,14 @@ export default function LoginForm() {
   const navigate = useNavigate()
   const [user, setUser] = useState({});
   const [showPwd, setShowPwd] = useState()
+
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`
+  const handleKakaoLogin = ()=>{
+      window.location.href = kakaoURL;
+      console.log(new URL(window.location.href))
+  }
+
+
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -24,6 +32,9 @@ export default function LoginForm() {
   const handlePwdHide = () => {
     setShowPwd(!showPwd)
   }
+  
+
+  
 
 
   return (
@@ -59,7 +70,7 @@ export default function LoginForm() {
           <p>간편하게 로그인하기</p>
           <SocialLoginIcons>
             <img src={google_icon} />
-            <img src={kakao_icon} />
+            <img onClick={handleKakaoLogin} src={kakao_icon} />
           </SocialLoginIcons>
 
         </SocialLogin>
