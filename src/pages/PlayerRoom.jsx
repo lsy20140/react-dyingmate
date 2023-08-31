@@ -6,7 +6,6 @@ import { CameraControls } from '../Camera';
 import { Diary } from '../components/models/Diary';
 import { Phone } from '../components/models/Phone';
 import { WillPaper } from '../components/models/WillPaper';
-import { Room } from '../components/models/PlayerRoom/Room';
 import { usePlay } from '../contexts/Play';
 import { BoardForLightingmap } from '../components/models/PlayerRoom/BoardForLightingmap';
 import ModalOverlay from '../components/PlayerRoom/ModalOverlay';
@@ -15,6 +14,7 @@ import styled from 'styled-components';
 import { Shelf } from '../components/models/Shelf';
 import { Desktop } from '../components/models/Desktop';
 import FriendListModal from '../components/PlayerRoom/FriendListModal';
+import { Room } from '../components/models/PlayerRoom/Room';
 
 
 
@@ -82,8 +82,10 @@ export default function PlayerRoom() {
 
       return () => clearTimeout(delayFunc)
     }
-    console.log(position, target)
+    
   },[curIdx])
+
+
 
   const LightHelper = () => {
     useHelper(light1, DirectionalLightHelper, 1, "red");
@@ -94,13 +96,12 @@ export default function PlayerRoom() {
 
   return (
     <>
-      <Canvas camera={{position:[20,8,0]}} shadowMap colorManagement>
+      <Canvas camera={{position:[20,8,0]}} colorManagement>
         {/* <LightHelper /> */}
         <axesHelper args={[200, 200, 200]} />
         <ambientLight intensity={0.1} />
         <directionalLight ref={light1} intensity={1.5}  decay={2} color="#eca864" position={[ 17, 12.421, -2]} target-position={[0, 9, 2]} />
         <directionalLight ref={light2} intensity={1.2} castShadow decay={2} color="#d8b58d" position={[22, 15.344, -5]} target-position={[2, 10, 0]} />
-        
         <CameraControls position={position} target={target} />
         <group rotation-y={-Math.PI}>
           <Room/>
@@ -108,7 +109,7 @@ export default function PlayerRoom() {
             <WillPaper/>
           </group>
           <group ref={boardRef} onClick={() => handleClick(2)}>
-            <BoardForLightingmap/>
+            <BoardForLightingmap/>  
           </group>
           <group onClick={() => handleClick(3)}>
             <Phone/>
@@ -128,11 +129,11 @@ export default function PlayerRoom() {
       { focus && <ModalOverlay setCamera={setCamera} curIdx={curIdx} />}
 
 
-      <div onClick={() => {handleClick(10); setFriendList(true)}}>
+      {/* <div onClick={() => {handleClick(10); setFriendList(true)}}>
         <FriendListButton src={kakao_icon}/>
       </div>
 
-      { friendList && <FriendListModal/> }
+      { friendList && <FriendListModal/> } */}
 
     </>
 
