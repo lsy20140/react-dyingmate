@@ -1,18 +1,24 @@
 import React from 'react'
 
-export default function StyledButton({text, btnColor}) {
+export default function StyledButton({width, text, btnColor, handleOnClick}) {
   const ButtonStyle = {
-    width: "fit-content",
+    width: `${width}`,
     color: "white",
     fontWeight: "700",
     borderRadius: "1.25rem",
     backgroundColor: `${btnColor}`,
-    padding: "0.75rem 2.25rem",
+    padding: "0.75rem 0",
     border: "none"
   }
 
   return (
-    <button style={ButtonStyle}>
+    <button 
+      style={ButtonStyle}
+      onClick={(e) => {
+        e.preventDefault()
+        handleOnClick && handleOnClick()
+      }}
+    >
       {text}
     </button>
   )
