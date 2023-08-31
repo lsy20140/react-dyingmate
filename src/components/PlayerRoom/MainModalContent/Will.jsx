@@ -1,26 +1,60 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import {ReactComponent as WillIcon} from '../../../assets/icons/PlayerRoom/ModalContent/will.svg'
+import {ReactComponent as MainIcon} from '../../../assets/icons/PlayerRoom/Will/main_icon.svg'
 import willPaper from '../../../assets/img/PlayerRoom/will_paper.png'
 import StyledButton from '../../ui/StyledButton';
+import axios from 'axios'  
+
 
 export default function Will() {
-  const [content, setContent] = useState('');
+  let [data, setData] = useState('');
 
   const textarea = useRef();
 
   const handleChange = (e) => {
-    setContent(e.target.value);
-
+    setData(e.target.value)
+    console.log(data)
     textarea.current.style.height = '42rem'
     // textarea.current.style.height = textarea.current.scrollHeight + 'px';
   }
+
+  const handleSubmit = async(e) => {
+    // 할 일 추가 api 연동  
+    axios.post(
+      'http://localhost:8080/will/post',
+      {content: data},
+      {withCredentials: true,}
+      
+    )
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/will/get?willId=2', {
+
+      
+    }, )
+    .then(function (response) {
+      console.log("요청 성공")
+      console.log(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+ 
+  },[])
 
   return (
     <>
       <Container>
         <TextArea>
-          <WillIcon/>
+          <MainIcon/>
           <div>다음 질문을 통해, </div>
           <p>나의 삶에 대해 신중히 고민해보고 <br/> 유언장을 써내려가 보아요. </p>
           <p>나는 어떤 사람이었나요? <br/>
@@ -28,21 +62,20 @@ export default function Will() {
               무엇인가요?</p>
           <p>죽기 전, 가장 떠오르는 사람은 누구인가요? </p>
         </TextArea>
-        <WillContainer>
+        <WillContainer method='POST'>
           <FormInput 
-              ref={textarea}
-              type={"text"}
-              id='userCheckPwd' 
-              name='userCheckPwd' 
-              value={content ?? ''}
-              onChange={handleChange}
-              placeholder='내용을 입력해주세요.' 
-              spellcheck="false"
-              required
-            />
-            <StyledButton text={"완료하기"} btnColor={`var(--main-color)`} />
+            ref={textarea}
+            type={"text"}
+            id='content' 
+            name='content' 
+            value={data ?? ''}
+            onChange={handleChange}
+            placeholder='내용을 입력해주세요.' 
+            spellCheck="false"
+            required
+          />
+          <StyledButton width={'8rem'} handleOnClick={handleSubmit} text={"완료하기"} btnColor={`var(--main-color)`} />
         </WillContainer>
-
       </Container>
     </>   
   )
@@ -74,7 +107,7 @@ const TextArea = styled.div`
   }
 `
 
-const WillContainer = styled.div`
+const WillContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
