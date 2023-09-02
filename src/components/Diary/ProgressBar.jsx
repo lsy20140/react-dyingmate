@@ -6,17 +6,25 @@ export default function ProgressBar({curIdx}) {
   const arrIdx = new Array(4).fill(0);
 
   return (
-    <div>
+    <ProgressBarWrapper>
       {arrIdx.map((item, i) => (
         <OneStepWrapper>
           <ProgressBarOneStep curStep={(i+1 <= curIdx) ? true: false} text={(i+1 !== 4) ? `Step ${i+1}` : 'Finish'}/>
           {i!==3 && <Line curStep={(i+1 < curIdx) ? true: false}/>}
         </OneStepWrapper>
       ))}
-    </div>
+    </ProgressBarWrapper>
   )
 }
 
+const ProgressBarWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  bottom: 10rem;
+  color: white;
+`
 
 const OneStepWrapper= styled.div`
   display: flex;

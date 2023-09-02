@@ -56,9 +56,8 @@ export default function Diary() {
           {comp}
           <Button onClick={(e)=>{handleIndex('next', e)}} style={(curIdx === 4) ? {opacity: 0} : {}}><NextButton/></Button>
         </div>
-        <ProgressBar curIdx={curIdx}/>
       </Container>
-      
+      <ProgressBar curIdx={curIdx}/>
 
     </>
   )
@@ -72,7 +71,6 @@ const Container = styled.div`
   box-sizing: border-box;
   border-radius: 2.5rem;  
   padding: 2.5rem 15rem;
-  gap: 5.75rem;
   color: white;
   margin: auto;
 
@@ -80,6 +78,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5.75rem;
   }
 
 

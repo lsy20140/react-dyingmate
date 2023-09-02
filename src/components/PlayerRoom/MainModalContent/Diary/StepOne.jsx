@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
 import MethodItem from '../../../Diary/MethodItem'
+import MethodExplain from '../../../Diary/MethodExplain';
 
 export default function StepOne() {
   const [curIdx, setCurIdx] = useState(1);
@@ -22,20 +23,23 @@ export default function StepOne() {
           </p>
         </Text>
       </TextArea>
-      <ul>
-        {
-          data.map((item, i) => (
-            <MethodItem isSelected={(curIdx === i+1) ? true: false} handleOnClick={() => setCurIdx(i+1)} itemText={item.itemText} />
-          ))
-        }
-      </ul>
+      <Main>
+        <ul>
+          {
+            data.map((item, i) => (
+              <MethodItem isSelected={(curIdx === i+1) ? true: false} handleOnClick={() => setCurIdx(i+1)} itemText={item.itemText} />
+            ))
+          }
+        </ul>
+        <MethodExplain explain={data[curIdx-1].explain} />
+      </Main>
     </Content>
 
   )
 }
 
 const Content = styled.div`
-  width: 80rem;
+  width: 60rem;
   flex-direction: column;
   ul {
     width: 100%;
@@ -59,4 +63,9 @@ const Text = styled.div`
     font-size: 1.25rem;
   }
 
+`
+
+const Main = styled.div`
+  display: flex;
+  gap: 2rem;
 `
