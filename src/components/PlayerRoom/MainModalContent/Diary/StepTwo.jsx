@@ -6,19 +6,21 @@ import GraveStoneSrc from '../../../../assets/img/PlayerRoom/diary_gravestone.pn
 export default function StepTwo() {
 
   const [stoneText, setStoneText] = useState('');
+  const [isDone, setIsDone] = useState(false)
 
   const handleChange = (e) => {
     setStoneText(e.target.value);
   }
 
   const handleClick = (e) => {
-    // 묘비명 저장 api 연동
+    setIsDone(true);
+    // 묘비명 저장, 수정 api 연동
     // 묘비 오브젝트에 묘비명 적용된 컴포넌트로 전환
   }
 
   return (
     <Content>
-      <GraveStone/>
+      <GraveStone><p>{isDone ? stoneText : ''}</p></GraveStone>
       <div>
         <TextArea>
           <MainIcon/>
@@ -38,7 +40,7 @@ export default function StepTwo() {
             placeholder='묘비명을 입력해주세요.' 
             onChange={handleChange}
             required/>
-          <Button onClick={handleClick}>저장하기</Button>
+          <Button onClick={handleClick} isDone={isDone}>{isDone ? '수정하기' : '저장하기'}</Button>
         </InputBox>
       </div>
 
@@ -69,6 +71,20 @@ const GraveStone = styled.div`
   width: 13rem;
   height: 20rem;
   background-repeat:no-repeat;
+  align-items: center;
+  justify-content: center;
+  font-family: Perpetua Titling MT;  
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.33125rem;
+
+  p {
+    width: 9rem;
+    word-break: break-all;
+    text-align: center;
+  }
+
+
 `
 
 const TextArea = styled.div`
@@ -94,12 +110,13 @@ const Button = styled.button`
   width: 11rem;
   height: 3.5rem;
   border: none;
-  background-color: var(--main-color);
-  color: white;
+  background-color: ${props => props.isDone ? '#F0EAE0' :`var(--main-color)`} ;
+  color: ${props => props.isDone ? `var(--font-gray-3)` : 'white'};
   padding: 0.75rem 1.5rem;
   border-radius: 1.25rem;
   position: absolute;
   font-weight: 700;
+  
 
 `
 
