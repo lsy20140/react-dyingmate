@@ -55,6 +55,7 @@ export default function Onboarding() {
             </span>
           }
           { curIdx === 2 && 
+          <Footer>
             <InputBox>
               <FormInput 
                 type='text' 
@@ -66,6 +67,8 @@ export default function Onboarding() {
                 required/>
               <Button onClick={handleDiaglogBox}>저장하기</Button>
             </InputBox>
+          </Footer>
+
           }
         </ContentBox>
       </Container>
@@ -88,6 +91,8 @@ const Container = styled.div`
 `
 
 const ContentBox = styled.div`
+  display: flex;
+  flex-direction: column;
   position: absolute;
   width: 45%;
   padding: 4rem 11rem;
@@ -113,8 +118,16 @@ const ContentBox = styled.div`
 
 `
 
+const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.75rem;
+`
+
 const Button = styled.button`
-  width: 9rem;
+  display: block;
+  width: 11rem;
   height: 3rem;
   border: none;
   background-color: var(--main-color);
@@ -122,23 +135,21 @@ const Button = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 1.25rem;
   position: absolute;
-  right: 20rem;
-
+  font-weight: 700;
 
 `
 
+
 const InputBox= styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 1.75rem;
-
+  justify-content: flex-end;
 `
 
 const FormInput = styled.input`
   position: relative;
   box-sizing: border-box;
-  border-radius: 20px;
-  width: 60% ;
+  border-radius: 1.25rem;
+  width: 30rem;
   height: 3rem;
   color: var(--font-gray-1);
   background-color: #F3F3F3;
