@@ -39,17 +39,15 @@ export default function ModalOverlay({curIdx, setCamera}) {
   
 
   return (
-    <>
-      <Overlay>
-        <Header>
-          <img src={title} />
-          <CloseModal onClick={handleClick}/>
-        </Header>
-        <div ref={modalRef}>
-          {comp}
-        </div>
-      </Overlay>
-    </>
+    <Overlay>
+    <Header>
+      <img src={title} />
+      <CloseModal onClick={handleClick}/>
+    </Header>
+    <div ref={modalRef}>
+      {comp}
+    </div>
+  </Overlay>
   )
 }
 
@@ -61,19 +59,19 @@ const Overlay = styled.div`
   right:0;
   text-align: center;
   justify-content: center;
-  background-color: rgba(28, 23, 23, 0.40);
+  background-color: #1C1717B2;
   height: 100vh;
 
   &{
     z-index: 999;
   }
+
 `
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 3.75rem 6.25rem;
-
   img{
     width: 11.25rem;
   }

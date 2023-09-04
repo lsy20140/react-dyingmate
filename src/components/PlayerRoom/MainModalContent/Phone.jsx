@@ -1,17 +1,20 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../assets/icons/PlayerRoom/Phone/main_icon.svg'
 import {ReactComponent as IconWrapper} from '../../../assets/icons/PlayerRoom/Phone/header_wrapper.svg'
 import axios from 'axios'  
 import StyledButton from '../../ui/StyledButton'
 import {ReactComponent as SendIcon} from '../../../assets/icons/PlayerRoom/Phone/send_icon.svg'
-
+import { ReactComponent as BubbleVector } from '../../../assets/img/PlayerRoom/message_bubble_vec.svg'
 
 export default function Phone() {
   const [data, setData ] = useState('')
+  const [isSend, setIsSend] = useState(false);
 
   // 날짜 구하기
   const date = new Date();
+  const week = ['일', '월', '화', '수', '목', '금', '토'];
+
   const textarea = useRef();
 
 
@@ -21,8 +24,27 @@ export default function Phone() {
   }
 
   const handleSubmit = (e) => {
-
+    setIsSend(true);
+    textarea.value = ''
   }
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:8080/message/get?messageId=1', {
+
+      
+  //   }, )
+  //   .then(function (response) {
+  //     console.log("요청 성공")
+  //     console.log(response.data)
+  //     setData(response.data.toString())
+  //     console.log("data:" , data)
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+ 
+  // },[data])
+
 
   return (
     <>
@@ -33,7 +55,17 @@ export default function Phone() {
             <IconWrapper/>
           </Header>
           <Main>
-            <p>부고문자는 한번만 작성할 수 있으니 신중하게 작성해야 합니다. </p>
+            <p>부고문자는 한번만 작성할 수 있으니 신중하게 작성해야 합니다. <br/>
+              {date.getMonth()}월 {date.getDay()}일 ({week[date.getDay()]}) {date.getHours()}:{String(date.getMinutes()).padStart(2, "0")}
+            </p>
+            {isSend && 
+            <MessageArea>
+              <Bubble>
+                <p>{data}</p>
+                <BubbleVector/>
+              </Bubble>
+            </MessageArea>
+            }
 
           </Main>
           <Footer method='POST'>
@@ -65,6 +97,7 @@ export default function Phone() {
 
 const Container = styled.div`
   width: 100%;
+  height: calc(100vh - 11rem); 
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -78,7 +111,7 @@ const Container = styled.div`
 
 const PhoneWrapper = styled.div`
   width: 26rem;
-  height: 46rem;
+  height: 95%;
   background-color: white;
   border-radius: 1.25rem;
   display: flex;
@@ -106,11 +139,39 @@ const Main = styled.div`
   padding: 1.8rem;
   height: 38rem;
   font-size: 0.875rem;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   p{
     color: var(--font-gray-3);
   }
 
+`
+
+const MessageArea = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    position: absolute;
+    right: -0.78rem;
+    bottom:0;
+  }
+`
+
+const Bubble = styled.div`
+  background-color: var(--main-color);
+  height: fit-content;
+  width: 17.25rem;
+  text-align: left;
+  border-radius: 1.25rem;
+  position: relative;
+  p{
+    color: white;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
 `
 
 const TextArea = styled.div`
@@ -150,3 +211,4 @@ const FormInput = styled.textarea`
   }
 
 `
+

@@ -22,7 +22,7 @@ const ProgressBarWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  bottom: 10rem;
+  bottom: 8rem;
   color: white;
 `
 

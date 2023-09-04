@@ -64,13 +64,12 @@ export default function Diary() {
 }
 const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 11rem); 
   position: absolute;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   border-radius: 2.5rem;  
-  padding: 2.5rem 15rem;
+  padding: 1rem 8rem 2.5rem 8rem;
   color: white;
   margin: auto;
 

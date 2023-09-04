@@ -83,6 +83,7 @@ export default function Will() {
 
 const Container = styled.div`
   width: 100%;
+  height: calc(100vh - 11rem); 
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -131,6 +132,7 @@ const FormInput = styled.textarea`
   }
   &::placeholder {
     color: var(--font-gray-1);
+    font-family: 'UnPilgi';
   }
   caret-color: transparent
 `

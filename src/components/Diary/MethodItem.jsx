@@ -19,12 +19,11 @@ const ItemBox = styled.div`
   justify-content: space-between;
   height: 4.375rem;
   border-radius: 1rem;
-  
+  align-items: center;
   font-size: 1.25rem;
   font-weight: 700;
   background: ${props => props.isSelected ? '#F0EAE0' : 'rgba(240, 234, 224, 0.40)'};
   color: ${props => props.isSelected ? `var(--main-color)` : 'white'};
-  align-items: center;
   padding: 0 1.5rem;
   margin-bottom: 0.75rem;
 

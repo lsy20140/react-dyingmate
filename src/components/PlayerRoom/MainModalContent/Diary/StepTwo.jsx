@@ -43,7 +43,6 @@ export default function StepTwo() {
           <Button onClick={handleClick} isDone={isDone}>{isDone ? '수정하기' : '저장하기'}</Button>
         </InputBox>
       </div>
-
     </Content>
   )
 }
@@ -91,7 +90,7 @@ const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 2.4rem;
+  gap: 1.8rem;
  
 `
 

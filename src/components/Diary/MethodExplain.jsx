@@ -13,13 +13,13 @@ export default function MethodExplain({explain}) {
 
 const ExplainBox = styled.div`
   display: flex;
+  flex: 50%;
   flex-direction: column;
   gap: 0.75rem;
   align-items: flex-start;
   text-align: left;
-  width: 28rem;
   background-color: #F0EAE0;
-  padding: 3.75rem 1.8rem;
+  padding: 3rem 1.8rem;
   color: var(--font-gray-3);
   font-size: 1.125rem;
   border-radius: 1.5rem;

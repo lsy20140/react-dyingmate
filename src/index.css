@@ -55,6 +55,10 @@ p{
 
 }
 
+::placeholder{
+  font-family: Pretendard;
+}
+
 
 body {
   width: 100vw;
@@ -78,6 +82,11 @@ body {
 
 input {
   border: none;
+  font-family: Pretendard;
+}
+
+textarea {
+  font-family: Pretendard;
 }
 
 input:focus {
