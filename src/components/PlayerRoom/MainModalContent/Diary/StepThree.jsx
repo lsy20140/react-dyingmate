@@ -1,23 +1,31 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
+import UploadFrameSrc from '../../../../assets/img/PlayerRoom/upload_frame.png'
 import UploadBoxSrc from '../../../../assets/img/PlayerRoom/upload_box.png'
 
 export default function StepThree() {
-  const handleUploadFile = () => {
+  const fileInput = useRef(null)
+  const [selectImg, setSelectImg] = useState()
 
+  const handleUploadFile = () => {
+    // 파일 업로드 api 연동
   }
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
+    const {name, value, files} = e.target;
+
+    if(name === 'file') {
+      setSelectImg(files && files[0]);
+      return;
+    }
   };
 
   return (
     <Content>
       <UploadBox>
-        <div>
-          <img src={UploadBoxSrc} alt="btnStart"/>
-        </div>
-        <input type="file" id='img_file' accept="image/jpg, image/png, image/jpeg" onChange={handleChange}/>
+        <img src={UploadFrameSrc} onClick={handleUploadFile}/>
+        <img src={selectImg ? URL.createObjectURL(selectImg) : UploadBoxSrc } />
+        <input type="file" name='file' ref={fileInput} accept='.png, .jpg,image/*' onChange={handleChange}/>
       </UploadBox>
 
       <TextArea>
@@ -45,14 +53,25 @@ const Content = styled.div`
 `
 
 const UploadBox = styled.div`
-  margin: 2rem;
-  img{
-    max-width: 13rem;
-  }
+  width: 15rem;
+  height: 20rem;
   background-repeat:no-repeat;
   align-items: center;
   justify-content: center;
   display: flex;
+  position: relative;
+  img:nth-child(1){
+    position: absolute;
+    width: 14.4375rem;
+    height: 20rem;
+  }
+  img:nth-child(2){
+    position: absolute;
+    width: 10.8rem;
+    height: 16.5rem;
+    border-radius: 0.25rem;
+  }
+  
 
   input[type="file"] {
     width: 10rem;
