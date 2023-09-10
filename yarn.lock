@@ -1659,6 +1659,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.5.5":
+  version: 7.22.15
+  resolution: "@babel/runtime@npm:7.22.15"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 793296df1e41599a935a3d77ec01eb6088410d3fd4dbe4e92f06c6b7bb2f8355024e6d78621a3a35f44e0e23b0b59107f23d585384df4f3123256a1e1492040e
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.5, @babel/template@npm:^7.3.3":
   version: 7.22.5
   resolution: "@babel/template@npm:7.22.5"
@@ -2297,6 +2306,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jkroso/type@npm:1":
+  version: 1.1.1
+  resolution: "@jkroso/type@npm:1.1.1"
+  checksum: c2bb3cf56d8225e8e74ccb5e1dcc44132ab89056389f18ac05866c540873a4b330034e78cc3f95628f80ed576e58d4a6dea7dbcd09447992187ee3f0883a8509
+  languageName: node
+  linkType: hard
+
 "@jridgewell/gen-mapping@npm:^0.3.0, @jridgewell/gen-mapping@npm:^0.3.2":
   version: 0.3.3
   resolution: "@jridgewell/gen-mapping@npm:0.3.3"
@@ -2772,6 +2788,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-spring/animated@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/animated@npm:9.7.3"
+  dependencies:
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 468942ca3a11c02c3e56def26b2da9dd10ddbed548004245c4ac309cce00b58d971e781abed67db0d652f72737eaa73766ea9a43b8ef3b08a7ed2eddc04d4c39
+  languageName: node
+  linkType: hard
+
 "@react-spring/core@npm:~9.6.1":
   version: 9.6.1
   resolution: "@react-spring/core@npm:9.6.1"
@@ -2783,6 +2811,50 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 7e0aaec8a6f68b3f2399533947cdbf1b2c4f94a6b01eb1d577516af7385cd302d775f1f3f10b838581edd70773d314ba066dbce0b63169b4cf2fd7791acc3d13
+  languageName: node
+  linkType: hard
+
+"@react-spring/core@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/core@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 8a80a07276458fd14099320eda824e58a11ce3a9b03a5c9cd3f4252adb4d26da04ee5caf5cbc961199f55c2d58a99638d5ea292cdb6aa029208dbab741b5c531
+  languageName: node
+  linkType: hard
+
+"@react-spring/konva@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/konva@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    konva: ">=2.6"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-konva: ^16.8.0 || ^16.8.7-0 || ^16.9.0-0 || ^16.10.1-0 || ^16.12.0-0 || ^16.13.0-0 || ^17.0.0-0 || ^17.0.1-0 || ^17.0.2-0 || ^18.0.0-0
+  checksum: f6fc2c686ee86ccdd1e618ad1bfe99218a20ab84da7464be82b93f9f8fbdbcdf880c0433ae6964eaec6af6c8f328bd503188f9fd98e43bd0e12dd1838a835607
+  languageName: node
+  linkType: hard
+
+"@react-spring/native@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/native@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0  || >=17.0.0 || >=18.0.0
+    react-native: ">=0.58"
+  checksum: 8635153a696310c661a5a1d16ed57fbcd1941c230344a03fa4115e033c487f67049e7659248e3eac11d24ef407a929a8683afa5be4cc05821568b9e417c67032
   languageName: node
   linkType: hard
 
@@ -2805,6 +2877,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-spring/shared@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/shared@npm:9.7.3"
+  dependencies:
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 912b5e567eb5345c9a6c8e8c0c2d69b1f411af72a0685b95831809c267c89846a31341ca071f284ace98b3cb5de647054dc76f6ace81d6379513eaf96b52f195
+  languageName: node
+  linkType: hard
+
 "@react-spring/three@npm:~9.6.1":
   version: 9.6.1
   resolution: "@react-spring/three@npm:9.6.1"
@@ -2821,10 +2904,65 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-spring/three@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/three@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    "@react-three/fiber": ">=6.0"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    three: ">=0.126"
+  checksum: 67cbe3ab3ed5de0389d1b13d7711ad6e63562fbd3f097927b8380846ec6c9a96c3415f7c5ce4b90b05c04545bc1d941fd7bc39c4dae2f554d31d014c20bb3c71
+  languageName: node
+  linkType: hard
+
 "@react-spring/types@npm:~9.6.1":
   version: 9.6.1
   resolution: "@react-spring/types@npm:9.6.1"
   checksum: 803dc6c2d67773ee1e5d00d2feac291dad32cf4ca6a790554d6133dd4cd39aeb89b3beea4cc67f91c2d2e4bdbd1a995540dc7fee117138e207a105d255d39c1c
+  languageName: node
+  linkType: hard
+
+"@react-spring/types@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/types@npm:9.7.3"
+  checksum: f47b81fe556464aa54a78603311cb584d6a0f03088522229afb058265bbe2ade2095a55ec7f4e960c3b9cceaa5d47865bc41fc6643c0f5f4bd3d8650203d8389
+  languageName: node
+  linkType: hard
+
+"@react-spring/web@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/web@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 7f5cd05b2314b7f2f715e1926abcf9aa0a539399b222ab34e989144f48350adfcd2edab65d41425570f72c57f602fc6994d6730fbeed902171ac527b630a8a9b
+  languageName: node
+  linkType: hard
+
+"@react-spring/zdog@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/zdog@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-zdog: ">=1.0"
+    zdog: ">=1.0"
+  checksum: b4933e5142835fba09f127686b71208f4da9322707cde39ee87071600d819b1e3e69e2eeb0911d994df84d38344b439d8c53534bc08ffff0a583c9302fd21925
   languageName: node
   linkType: hard
 
@@ -2900,20 +3038,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-three/postprocessing@npm:^2.14.9":
-  version: 2.14.9
-  resolution: "@react-three/postprocessing@npm:2.14.9"
+"@react-three/postprocessing@npm:^2.15.1":
+  version: 2.15.1
+  resolution: "@react-three/postprocessing@npm:2.15.1"
   dependencies:
-    maath: ^0.5.3
-    n8ao: ^1.5.1
-    postprocessing: ^6.31.0
-    screen-space-reflections: ^2.5.0
+    maath: ^0.6.0
+    n8ao: ^1.6.6
+    postprocessing: ^6.32.1
     three-stdlib: ^2.23.4
   peerDependencies:
     "@react-three/fiber": ">=8.0"
     react: ">=18.0"
     three: ">= 0.138.0"
-  checksum: 8a0f34dd0137f74147f2fd7135ce5b034887f8dd3a456137a57c79ba4200cdefae80f014203da8b97085f2ea0951435fb21513ae6454446dc5fe9f0237d03c39
+  checksum: 5f6a226445e94902e1238cd54120307f32ba3f2f3160817cf54a0471c63329c537c24e28a0c8f348f0737a18d3409a3a0971e7e26dabf747963d15ac116b7af7
   languageName: node
   linkType: hard
 
@@ -5840,10 +5977,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deep-freeze@npm:0.0.1":
+  version: 0.0.1
+  resolution: "deep-freeze@npm:0.0.1"
+  checksum: 1e43c98e44c7849382d9f896e679d48a1b5bf40993f7cc858e3730ef4e2ba387b9b7b7fe722cac34febe7f6a564cd242c27bbc319e8df793c2a287f21e5ba038
+  languageName: node
+  linkType: hard
+
 "deep-is@npm:^0.1.3, deep-is@npm:~0.1.3":
   version: 0.1.4
   resolution: "deep-is@npm:0.1.4"
   checksum: edb65dd0d7d1b9c40b2f50219aef30e116cedd6fc79290e740972c132c09106d2e80aa0bc8826673dd5a00222d4179c84b36a790eef63a4c4bca75a37ef90804
+  languageName: node
+  linkType: hard
+
+"deepmerge@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "deepmerge@npm:2.2.1"
+  checksum: 284b71065079e66096229f735a9a0222463c9ca9ee9dda7d5e9a0545bf254906dbc7377e3499ca3b2212073672b1a430d80587993b43b87d8de17edc6af649a8
   languageName: node
   linkType: hard
 
@@ -6254,6 +6405,15 @@ __metadata:
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 65b5df55a8bab92229ab2b40dad3b387fad24613263d103a97f91c9fe43ceb21965cd3392b1ccb5d77088021e525c4e0481adb309625d0cb94ade1d1fb8dc17e
+  languageName: node
+  linkType: hard
+
+"equals@npm:^1.0.5":
+  version: 1.1.0
+  resolution: "equals@npm:1.1.0"
+  dependencies:
+    "@jkroso/type": 1
+  checksum: 8b4aafef92e7dfa795245700fc25d19a920a08da5a9ffb781649e272689daf3fb6b076d252da430cf49eb43760bf4115345c907b920069dde27fcd94690cfc50
   languageName: node
   linkType: hard
 
@@ -9675,13 +9835,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"maath@npm:^0.5.2, maath@npm:^0.5.3":
+"maath@npm:^0.5.2":
   version: 0.5.3
   resolution: "maath@npm:0.5.3"
   peerDependencies:
     "@types/three": ">=0.144.0"
     three: ">=0.144.0"
   checksum: dfe2321a2a0c3ca80455d01bf2e98eb55b06abfdacd386ebe577f20d9eec9fa30ac7208d303362832fdfb8ffdfddbe0309e13e6e6eac17efd35353bbee9bcde6
+  languageName: node
+  linkType: hard
+
+"maath@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "maath@npm:0.6.0"
+  peerDependencies:
+    "@types/three": ">=0.144.0"
+    three: ">=0.144.0"
+  checksum: 6b8da7789f5607f77030bac5cdc50697fe81ac3bd0939883430f33340768ccf0e5528465b039d8328181bfb9e966d2ad60f694c45825b7d6be944f3f735c5023
   languageName: node
   linkType: hard
 
@@ -10075,13 +10245,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"n8ao@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "n8ao@npm:1.5.1"
+"n8ao@npm:^1.6.6":
+  version: 1.6.8
+  resolution: "n8ao@npm:1.6.8"
   peerDependencies:
     postprocessing: ">=6.30.0"
     three: ">=0.137"
-  checksum: 228ad7eba3833bda9941065c37ee83e9f273160e359a6978a8ff42059b8922ad823f8907424985a2cc970e2aa3413bda6b0f0a475c48d9b9cf697c04abdb25e1
+  checksum: b1d42d8b5f662e8c40c9a754172e0bd8870f4f6d7ad673cc82ef068d797422a3190e8648c32cad7896242bc6f54ecdbad830b13b98a8fc0427e3cbbbecf17b22
   languageName: node
   linkType: hard
 
@@ -11532,12 +11702,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postprocessing@npm:^6.31.0":
-  version: 6.31.0
-  resolution: "postprocessing@npm:6.31.0"
+"postprocessing@npm:^6.32.1":
+  version: 6.33.0
+  resolution: "postprocessing@npm:6.33.0"
   peerDependencies:
-    three: ">= 0.138.0 < 0.153.0"
-  checksum: e663c8f2456fa8a6ed1b8094d14459923d4a0ac458b1b095738271671c74fb5905f3affdc931e30528070818915b88b513b54b865dd2c1a5a3fa9c837cb5ef92
+    three: ">= 0.138.0 < 0.156.0"
+  checksum: a82cf04d96791f3275b0d696cc7454e7e50ef28e2c3a6fd02478bb4461eb1846f33e78eda6bbf7433666b224b20506045c4369cccad93f91fd6f1c64251f555a
   languageName: node
   linkType: hard
 
@@ -11656,7 +11826,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.0, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -11695,6 +11865,22 @@ __metadata:
   version: 2.3.0
   resolution: "punycode@npm:2.3.0"
   checksum: 39f760e09a2a3bbfe8f5287cf733ecdad69d6af2fe6f97ca95f24b8921858b91e9ea3c9eeec6e08cede96181b3bb33f95c6ffd8c77e63986508aa2e8159fa200
+  languageName: node
+  linkType: hard
+
+"pure-react-carousel@npm:^1.30.1":
+  version: 1.30.1
+  resolution: "pure-react-carousel@npm:1.30.1"
+  dependencies:
+    "@babel/runtime": ^7.5.5
+    deep-freeze: 0.0.1
+    deepmerge: ^2.2.1
+    equals: ^1.0.5
+    prop-types: ^15.6.2
+  peerDependencies:
+    react: 15.x || 16.x || 17.x || 18.x
+    react-dom: 15.x || 16.x || 17.x || 18.x
+  checksum: f117e2366def64464b0e58e2df257d3b4bb107e1608a317e38987bf173f23006355619cbe8d62f00652c48a80ed4ac137c7ca5375f1b9b521e56efadd255e41b
   languageName: node
   linkType: hard
 
@@ -11864,18 +12050,20 @@ __metadata:
     "@babel/runtime": ^7.22.5
     "@react-three/drei": ^9.74.8
     "@react-three/fiber": ^8.13.1
-    "@react-three/postprocessing": ^2.14.9
+    "@react-three/postprocessing": ^2.15.1
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^13.0.0
     "@testing-library/user-event": ^13.2.1
     axios: ^1.4.0
     gsap: ^3.12.1
     lamina: ^1.1.23
+    pure-react-carousel: ^1.30.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-icons: ^4.10.1
     react-router-dom: ^6.12.1
     react-scripts: 5.0.1
+    react-spring: ^9.7.2
     styled-components: ^6.0.0-rc.3
     three: ^0.153.0
     url-loader: ^4.1.1
@@ -12037,6 +12225,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-spring@npm:^9.7.2":
+  version: 9.7.2
+  resolution: "react-spring@npm:9.7.2"
+  dependencies:
+    "@react-spring/core": ~9.7.3
+    "@react-spring/konva": ~9.7.3
+    "@react-spring/native": ~9.7.3
+    "@react-spring/three": ~9.7.3
+    "@react-spring/web": ~9.7.3
+    "@react-spring/zdog": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: c3cfe2091d1d0dcce34f5a400c379603664821be5a72f6f9815131c6777dd47aea5b6bccbd3ad2cb8e0194489349202e9592cd49595ef768a22c6eb69262c352
+  languageName: node
+  linkType: hard
+
 "react-use-measure@npm:^2.1.1":
   version: 2.1.1
   resolution: "react-use-measure@npm:2.1.1"
@@ -12153,6 +12358,13 @@ __metadata:
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "regenerator-runtime@npm:0.14.0"
+  checksum: 1c977ad82a82a4412e4f639d65d22be376d3ebdd30da2c003eeafdaaacd03fc00c2320f18120007ee700900979284fc78a9f00da7fb593f6e6eeebc673fba9a3
   languageName: node
   linkType: hard
 
@@ -12580,16 +12792,6 @@ __metadata:
     ajv-formats: ^2.1.1
     ajv-keywords: ^5.1.0
   checksum: f88af7cc0739ee29501ac40e135a4ff7e667a6e7a4c3814086d24b17377bfe0c8ea260c36a89ccbeefbb30f4508d67f336fd0df1a16966e1ba00c8d58a6323b1
-  languageName: node
-  linkType: hard
-
-"screen-space-reflections@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "screen-space-reflections@npm:2.5.0"
-  peerDependencies:
-    postprocessing: ">=6.28.0"
-    three: ">=0.141.0"
-  checksum: bbe5f157fd7e4fd6c34d88d43032ae472b51c00bf6b3de9114bd85c1fe2974ac3fd59f00d0a0fc8f8b10f10b338fa5613ced195a62d3d949293a1d98eeee5738
   languageName: node
   linkType: hard
 
