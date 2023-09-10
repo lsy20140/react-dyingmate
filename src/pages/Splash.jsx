@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import background from '../assets/img/background.jpg'
-import splashBg from '../assets/img/splashBg.jpg'
+import splashBg from '../assets/img/splashBg.png'
 
 splashBg
 import title from '../assets/img/title.png'
@@ -34,34 +33,32 @@ export default function Splash() {
 }
 
 
-// styled-components
-
 const Header = styled.div`
   position: absolute;
   top: 3.75rem;
   right: 3rem;
-
 `
 
 const SplashContainer = styled.div`
   width: 100%;
   height: 100%;
-   background-image: url(${splashBg});
-  background-color: #FFF9F0;
+  background-image: url(${splashBg});
   background-size: cover;
   display: flex;
+  justify-content: center;
 `
 const ContentBox = styled.div`  
   display: flex;
-  gap: 16rem;
-  margin: auto;
-  margin-top: 15rem;
+  gap: 18rem;
+  margin: 0 auto;
 `
 
 const Description = styled.div`
-  margin-top: 8rem;
   transform: translateX(75%);
-  justify-align: top;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
 
   img{
     animation: fadeIn 2s, fadeInDown 1.5s 1s ease-in-out;

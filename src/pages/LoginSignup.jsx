@@ -23,7 +23,7 @@ export default function LoginSignup() {
   })
 
   return (
-    <>
+    <Container>
       <FormBox>
         <TabWrapper>
           {tabArr.map((tab, idx) => (
@@ -36,14 +36,21 @@ export default function LoginSignup() {
         ) : <SignUpForm/>}
       </FormBox>
 
-    </>
+    </Container>
 
   )
 }
 
 // styled-components
+const Container = styled.div`
+  height: calc( 100% - 12rem);
+  display: flex;
+  margin-top: 12rem;
+`
+
 const FormBox = styled.div`
   width: 30rem;
+  height: fit-content;
   padding: 4rem 3.5rem;
   background: linear-gradient(223deg, rgba(0, 0, 0, 0.51) 0%, rgba(0, 0, 0, 0.12) 100%);
   outline: solid 2px white;
@@ -51,7 +58,7 @@ const FormBox = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-
+  backdrop-filter: blur(60px);
   label{
     margin-left: 1rem;
   }

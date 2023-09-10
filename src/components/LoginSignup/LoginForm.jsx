@@ -72,9 +72,7 @@ export default function LoginForm() {
             <img src={google_icon} />
             <img onClick={handleKakaoLogin} src={kakao_icon} />
           </SocialLoginIcons>
-
         </SocialLogin>
-
       </form>
 
     </>
