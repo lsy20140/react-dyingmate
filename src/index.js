@@ -14,6 +14,8 @@ import Onboarding from './pages/Onboarding';
 import PlayerRoom from './pages/PlayerRoom';
 import BucketList from './pages/BucketList';
 import Auth from './pages/Auth';
+import GrandmaRoom from './pages/GrandmaRoom';
+import { RoomCameraProvider } from './contexts/RoomFocus';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +29,10 @@ const router = createBrowserRouter([
       {path: '/login', element: <LoginSignup/>},
       {path: '/onboarding', element: <Onboarding/>},
       {path: '/playerroom', element: <PlayerRoom/>},
+      {path: '/gmroom', element: <GrandmaRoom/>},
       {path: '/bucketlist', element: <BucketList/>},
-      {path: '/auth', element: <Auth/>}
+      {path: '/auth', element: <Auth/>},
+
     ]
   }
 ])
@@ -37,7 +41,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PlayProvider>
-      <RouterProvider router={router} />
+      <RoomFocusProvider>
+        <RouterProvider router={router} />
+      </RoomFocusProvider>
     </PlayProvider>
     
   </React.StrictMode>
