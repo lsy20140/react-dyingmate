@@ -31,13 +31,15 @@ export const Overlay = () => {
         <p className="outro__text">Finish</p>
         {/* <p className="outro__text">🔁메인으로 돌아가기</p> */}
       </div>
+
+      
     </div>
   );
 };
 
 // styled-components
 const GuideText = styled.div`
-  padding: 0.75rem 0;
+  padding: 0.75rem 20rem;
   font-size: 1.25rem;
   background-image:
     linear-gradient(
