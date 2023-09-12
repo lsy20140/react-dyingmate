@@ -8,6 +8,7 @@ import Will from '../PlayerRoom/MainModalContent/Will'
 import Phone from '../PlayerRoom/MainModalContent/Phone'
 import Diary from '../PlayerRoom/MainModalContent/Diary'
 import Board from './MainModalContent/Board';
+import Shelf from './MainModalContent/Shelf/Shelf';
 
 export default function ModalOverlay({curIdx, setCamera}) {
 
@@ -33,6 +34,9 @@ export default function ModalOverlay({curIdx, setCamera}) {
         break;
       case 4:
         setComp(<Diary/>)
+        break;
+      case 5: 
+        setComp(<Shelf/>)
         break;
     }
   },[]);

@@ -9,13 +9,13 @@ import { WillPaper } from '../components/models/WillPaper';
 import { usePlay } from '../contexts/Play';
 import { BoardForLightingmap } from '../components/models/PlayerRoom/BoardForLightingmap';
 import ModalOverlay from '../components/PlayerRoom/ModalOverlay';
-import kakao_icon from '../assets/icons/kakao_icon.png'
 import styled from 'styled-components';
 import { Shelf } from '../components/models/Shelf';
 import { Desktop } from '../components/models/Desktop';
 import FriendListModal from '../components/PlayerRoom/FriendListModal';
 import { Room } from '../components/models/PlayerRoom/Room';
 
+import { Selection, Select, EffectComposer, Outline } from '@react-three/postprocessing'
 
 
 export default function PlayerRoom() {
@@ -55,13 +55,13 @@ export default function PlayerRoom() {
       target = { x: 5, y: 4, z: -10 };
     } else if ( idx === 4) {
       position = { x: 10, y: 3, z: 5 };
-      target = { x: 5, y: 0, z: 5 };
+      target = { x: 5, y: 0, z: 4 };
     } else if ( idx ===5) {
-      position = { x: 50, y: 3, z: 5 };
-      target = { x: 5, y: 0, z: 5 };
+      position = { x: -8, y: 5, z: 11.5 };
+      target = { x: -12, y: 5, z: 12 };
     } else if ( idx ===6) {
-      position = { x: -10, y: 3, z: 5 };
-      target = { x: 5, y: 0, z: 5 };
+      position = { x: -8, y: 8, z: 4 };
+      target = { x: -10, y: 7, z: 4 };
     }
     if(curIdx === idx) {
       setCamera()
@@ -115,7 +115,7 @@ export default function PlayerRoom() {
             <Phone/>
           </group>
           <group onClick={() => handleClick(4)}>
-            <Diary/>
+              <Diary/>
           </group>
           <group onClick={() => handleClick(5)}>
             <Shelf/>

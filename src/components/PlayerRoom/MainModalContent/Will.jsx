@@ -19,11 +19,11 @@ export default function Will() {
   }
 
   const handleSubmit = async(e) => {
-    // 할 일 추가 api 연동  
+    // 유언장 추가 api 연동  
     axios.post(
-      'http://localhost:8080/will/post',
+      '/will/post',
       {content: data},
-      {withCredentials: true,}
+      {withCredentials: true},
       
     )
     .then((response) => {
@@ -36,13 +36,13 @@ export default function Will() {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8080/will/get?willId=2', {
+    axios.get('http://43.202.133.134:8080/will/get?willId=5', {
 
       
     }, )
     .then(function (response) {
       console.log("요청 성공")
-      console.log(response.data)
+      console.log("response.data",response.data)
     })
     .catch(function (error) {
       console.log(error);

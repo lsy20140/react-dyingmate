@@ -21,29 +21,43 @@ export default function Phone() {
   const handleChange = (e) => {
     setData(e.target.value);
     textarea.current.style.height = textarea.current.scrollHeight + 'px';
+    console.log(data)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setIsSend(true);
     textarea.value = ''
+    axios.post(
+      '/message/post',
+      {message: data},
+      {withCredentials: true},
+      
+    )
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
   }
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:8080/message/get?messageId=1', {
+  useEffect(() => {
+    axios.get('http://43.202.133.134:8080/message/get?messageId=2', {
 
       
-  //   }, )
-  //   .then(function (response) {
-  //     console.log("요청 성공")
-  //     console.log(response.data)
-  //     setData(response.data.toString())
-  //     console.log("data:" , data)
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+    }, )
+    .then(function (response) {
+      console.log("요청 성공")
+      console.log(response.data)
+      // setData(response.data.toString())
+      console.log("data:" , data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
  
-  // },[data])
+  },[])
 
 
   return (
