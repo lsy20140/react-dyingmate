@@ -6,12 +6,14 @@ import title from '../assets/img/title.png'
 import styled from 'styled-components'
 import LoginSignup from './LoginSignup'
 import { ReactComponent as IconSetting } from '../assets/icons/setting_icon.svg'
+import Setting from '../components/SetUp/Setting'
 
 export default function Splash() {
+  const [showSetup, setShowSetup] = useState(false);
 
   return (
     <>
-      <Header>
+      <Header onClick={() => setShowSetup(!showSetup)}>
         <IconSetting/>
       </Header>
       <SplashContainer>
@@ -26,6 +28,7 @@ export default function Splash() {
         </ContentBox>
       </SplashContainer>
 
+      {showSetup && <Setting />}
       
 
     </>
