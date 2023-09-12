@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <App/>,
     errorElement : <NotFound/>,
     children: [
-      {index: true, element: <PlayerRoom/>},
+      {index: true, element: <Splash/>},
       {path: '/splash', element: <Splash/>},
       {path: '/main', element: <Main/>},
       {path: '/login', element: <LoginSignup/>},
