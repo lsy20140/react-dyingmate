@@ -81,7 +81,7 @@ const TabWrapper = styled.div`
 
   li.selected{
     font-weight: 500;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid var(--main-color);
     color: white;
   }
 `;
