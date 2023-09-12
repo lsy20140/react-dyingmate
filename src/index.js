@@ -15,7 +15,8 @@ import PlayerRoom from './pages/PlayerRoom';
 import BucketList from './pages/BucketList';
 import Auth from './pages/Auth';
 import GrandmaRoom from './pages/GrandmaRoom';
-import { RoomCameraProvider } from './contexts/RoomFocus';
+import { RoomFocusProvider } from './contexts/RoomFocus';
+import ManRoom from './pages/ManRoom';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       {path: '/onboarding', element: <Onboarding/>},
       {path: '/playerroom', element: <PlayerRoom/>},
       {path: '/gmroom', element: <GrandmaRoom/>},
+      {path: '/manroom', element: <ManRoom/>},
       {path: '/bucketlist', element: <BucketList/>},
       {path: '/auth', element: <Auth/>},
 
