@@ -31,7 +31,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://guileless-sunflower-e58849.netlify.app/",
+  "homepage": "https://dying-mate.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
