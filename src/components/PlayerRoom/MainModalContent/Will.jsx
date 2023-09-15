@@ -23,7 +23,7 @@ export default function Will() {
     axios.post(
       'https://dying-mate-server.link/will/post',
       {content: data},
-      {withCredentials: false},
+      {withCredentials: true},
       
     )
     .then((response) => {
