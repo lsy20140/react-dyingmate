@@ -21,7 +21,7 @@ export default function Will() {
   const handleSubmit = async(e) => {
     // 유언장 추가 api 연동  
     axios.post(
-      'https://dying-mate-server.link/will/post',
+      '/will/post',
       {content: data},
       {withCredentials: true},
       
@@ -36,7 +36,7 @@ export default function Will() {
   }
 
   useEffect(() => {
-    axios.get('https://dying-mate-server.link/will/get?willId=5', {
+    axios.get('https://dying-mate-server.link/will/get?willId=2', {
 
       
     }, )
