@@ -36,7 +36,7 @@ export default function Will() {
   }
 
   useEffect(() => {
-    axios.get('http://43.202.133.134:8080/will/get?willId=5', {
+    axios.get('https://dying-mate-server.link/will/get?willId=5', {
 
       
     }, )
