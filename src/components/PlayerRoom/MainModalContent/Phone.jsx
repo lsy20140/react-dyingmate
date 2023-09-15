@@ -28,7 +28,7 @@ export default function Phone() {
     setIsSend(true);
     textarea.value = ''
     axios.post(
-      '/message/post',
+      '/api/message/post',
       {message: data},
       {withCredentials: true},
       
@@ -38,7 +38,7 @@ export default function Phone() {
         
     }).catch(function (error) {
         // 오류발생시 실행
-        console.log(error.message)
+        console.log(error.message)  
     })
   }
 
