@@ -2,3 +2,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+  [[redirects]]
+  from = "/proxy/*"
+  to = "https://dying-mate-server.link/:splat"
+  status = 200
+  force = true
