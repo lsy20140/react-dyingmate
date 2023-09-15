@@ -22,7 +22,7 @@ export default function Will() {
 
     // 유언장 추가 api 연동  
     axios.post(
-      'api/will/post',
+      '/api/will/post',
       {content: data},
       {withCredentials: true},
       
@@ -37,7 +37,7 @@ export default function Will() {
   }
 
   useEffect(() => {
-    axios.get('https://dying-mate-server.link/will/get?willId=11111', {
+    axios.get('https://dying-mate-server.link/will/get?willId=1', {
 
       
     }, )
