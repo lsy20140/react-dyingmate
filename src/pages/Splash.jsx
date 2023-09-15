@@ -14,7 +14,7 @@ export default function Splash() {
   return (
     <>
       <Header onClick={() => setShowSetup(!showSetup)}>
-        <IconSetting/>
+        {/* <IconSetting/> */}
       </Header>
       <SplashContainer>
         <ContentBox>
@@ -27,9 +27,6 @@ export default function Splash() {
           <LoginSignup/>
         </ContentBox>
       </SplashContainer>
-
-      {showSetup && <Setting />}
-      
 
     </>
   )
