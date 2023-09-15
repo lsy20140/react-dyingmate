@@ -19,9 +19,10 @@ export default function Will() {
   }
 
   const handleSubmit = async(e) => {
+
     // 유언장 추가 api 연동  
     axios.post(
-      'https://dying-mate-server.link/will/post',
+      'api/will/post',
       {content: data},
       {withCredentials: true},
       
