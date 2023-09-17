@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import splashBg from '../assets/img/splashBg.png'
-
-splashBg
 import title from '../assets/img/title.png'
 import styled from 'styled-components'
 import LoginSignup from './LoginSignup'
-import { ReactComponent as IconSetting } from '../assets/icons/setting_icon.svg'
+import MapOverlay from '../components/MapOverlay'
 import Setting from '../components/SetUp/Setting'
 
 export default function Splash() {
   const [showSetup, setShowSetup] = useState(false);
+  const [showMap, setShowMap] = useState(true);
 
   return (
     <>
@@ -27,7 +26,8 @@ export default function Splash() {
           <LoginSignup/>
         </ContentBox>
       </SplashContainer>
-
+      <MapOverlay showMap={showMap} setShowMap={setShowMap}/>
+      {/* <Setting/> */}
     </>
   )
 }
