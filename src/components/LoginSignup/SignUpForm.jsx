@@ -8,13 +8,22 @@ import axios from 'axios'
 
 export default function SignUpForm() {
   const navigate = useNavigate()
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
   const [checkPwd, setCheckPwd] = useState()
   const [showPwd, setShowPwd] = useState([])
 
-  const handleChange = (e) => {
-    const {name, value} = e.target
-    setUser((user) => ({...user, [name]: value}))
+  // const handleChange = (e) => {
+  //   const {name, value} = e.target
+  //   setUser((user) => ({...user, [name]: value}))
+  // }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePwd = (e) => {
+    setPwd(e.target.value)
   }
 
   const handleCheckPwd = (e) => {
@@ -28,7 +37,10 @@ export default function SignUpForm() {
     // 회원가입 post api 연결 필요
     axios.post(
       '/api/user/join',
-      JSON.stringify(user),
+      {
+        email: email,
+        pwd: pwd
+      },
       {withCredentials: true},
     )
     .then((response) => {
@@ -53,9 +65,9 @@ export default function SignUpForm() {
           type='text' 
           id='email' 
           name='email' 
-          value={user.email ?? ''}
+          value={email ?? ''}
           placeholder='아이디를 입력해주세요' 
-          onChange={handleChange}
+          onChange={handleEmail}
           required/><br/>  
 
         <PasswordInput>
@@ -63,9 +75,9 @@ export default function SignUpForm() {
             type={showPwd[0] ? "password" : "text"}
             id='pwd' 
             name='pwd' 
-            value={user.pwd ?? ''}
+            value={pwd ?? ''}
             placeholder='비밀번호를 입력해주세요' 
-            onChange={handleChange}
+            onChange={handlePwd}
             required
           />
           <img onClick={() => handlePwdHide(0)} src={hide_icon} />
