@@ -5,6 +5,7 @@ import {OrbitControls} from '@react-three/drei'
 import CharInitDialog from '../components/ui/CharInitDialog';
 import { CameraControls } from '../Camera';
 import { useRoomFocus } from '../contexts/RoomFocus';
+import { Test_sofa } from '../components/models/GrandmaRoom/Test_sofa';
 
 export default function GrandmaRoom() {
   const dialogRef = useRef();
@@ -40,6 +41,11 @@ export default function GrandmaRoom() {
         <group ref={roomRef} rotation-y={-Math.PI} rotation-z={-Math.PI/10} position-y={-5}>
           <GMHome/>
         </group>
+        <group position={[0, -3, 10]} rotation={[0,0,0]}>
+          <Test_sofa />
+        </group>
+
+        
       </Canvas>
       {!focus && <CharInitDialog />}
       
