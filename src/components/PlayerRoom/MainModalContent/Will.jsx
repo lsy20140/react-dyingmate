@@ -7,12 +7,12 @@ import axios from 'axios'
 
 
 export default function Will() {
-  let [data, setData] = useState({});
+  let [data, setData] = useState('');
 
   const textarea = useRef();
 
   const handleChange = (e) => {
-    setData((data) => ({...data, [e.target.name]: e.target.value}))
+    setData(e.target.value)
     console.log(data)
     textarea.current.style.height = '42rem'
     // textarea.current.style.height = textarea.current.scrollHeight + 'px';
@@ -23,7 +23,12 @@ export default function Will() {
     // 유언장 추가 api 연동  
     axios.post(
       '/api/will/post',
-      JSON.stringify(data),
+      {content: data},
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('login-token')}`,
+        }
+      },
       {withCredentials: true},
       
     )
