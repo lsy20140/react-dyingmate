@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components';
 import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
+import axios from 'axios'  
 
 export default function SignUpForm() {
   const navigate = useNavigate()
@@ -18,13 +19,25 @@ export default function SignUpForm() {
   const handleSubmit = (e) => {
     e.preventDefault()  
     navigate('/onboarding');  
+
+    // 회원가입 post api 연결 필요
+    axios.post(
+      '/api/user/join',
+      JSON.stringify(user),
+      {withCredentials: true},
+    )
+    .then((response) => {
+      console.log(response.data.email)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error)
+    })
   }
 
   const handlePwdHide = (idx) => {
     showPwd[idx] = !showPwd[idx]
     setShowPwd([...showPwd])
-    console.log("idx", idx);
-    console.log("showPwd", showPwd)
   }
 
 
