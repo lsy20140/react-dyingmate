@@ -9,6 +9,7 @@ import axios from 'axios'
 export default function SignUpForm() {
   const navigate = useNavigate()
   const [user, setUser] = useState({});
+  const [checkPwd, setCheckPwd] = useState()
   const [showPwd, setShowPwd] = useState([])
 
   const handleChange = (e) => {
@@ -16,9 +17,13 @@ export default function SignUpForm() {
     setUser((user) => ({...user, [name]: value}))
   }
 
+  const handleCheckPwd = (e) => {
+    setCheckPwd(e.target.value)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()  
-    navigate('/onboarding');  
+    // navigate('/onboarding');  
 
     // 회원가입 post api 연결 필요
     axios.post(
@@ -27,7 +32,7 @@ export default function SignUpForm() {
       {withCredentials: true},
     )
     .then((response) => {
-      console.log(response.data.email)
+      console.log(response)
         
     }).catch(function (error) {
         // 오류발생시 실행
@@ -46,9 +51,9 @@ export default function SignUpForm() {
       <form onSubmit={handleSubmit}>
         <FormInput 
           type='text' 
-          id='userId' 
-          name='userId' 
-          value={user.userId ?? ''}
+          id='email' 
+          name='email' 
+          value={user.email ?? ''}
           placeholder='아이디를 입력해주세요' 
           onChange={handleChange}
           required/><br/>  
@@ -56,9 +61,9 @@ export default function SignUpForm() {
         <PasswordInput>
           <FormInput 
             type={showPwd[0] ? "password" : "text"}
-            id='userPwd' 
-            name='userPwd' 
-            value={user.userPwd ?? ''}
+            id='pwd' 
+            name='pwd' 
+            value={user.pwd ?? ''}
             placeholder='비밀번호를 입력해주세요' 
             onChange={handleChange}
             required
@@ -70,11 +75,11 @@ export default function SignUpForm() {
         <PasswordInput>
           <FormInput 
             type={showPwd[1] ? "password" : "text"}
-            id='userCheckPwd' 
-            name='userCheckPwd' 
-            value={user.userCheckPwd ?? ''}
+            id='checkPwd' 
+            name='checkPwd' 
+            value={checkPwd ?? ''}
             placeholder='비밀번호를 재입력해주세요' 
-            onChange={handleChange}
+            onChange={handleCheckPwd}
             required
           />
           <img onClick={() => handlePwdHide(1)} src={hide_icon} />
