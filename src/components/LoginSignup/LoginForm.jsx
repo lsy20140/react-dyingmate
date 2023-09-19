@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
+import axios from 'axios'  
 
 
 export default function LoginForm() {
@@ -26,7 +27,27 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()  
-    navigate('/main');  
+    // navigate('/main');  
+
+    axios.post(
+      '/api/user/login',
+      JSON.stringify(user),
+      {withCredentials: true},
+    )
+    .then((response) => {
+      console.log(response)
+        
+    })
+    .then((response) => {
+      if(response.data.token) {
+        localStorage.setItem('login-token', response.data.token);
+      }
+    })
+    .catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
+
   }
 
   const handlePwdHide = () => {
