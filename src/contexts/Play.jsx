@@ -9,11 +9,17 @@ export const PlayProvider = ({ children }) => {
   const [focus, setFocus] = useState(false)
   const [startFunc, setStartFunc] = useState(false)
   const [friendList, setFriendList] = useState(false)
+  const [enter, setEnter] = useState(true)
 
   return (
     <Context.Provider
       value={{
-        play, setPlay, end, setEnd, hasScroll, setHasScroll, focus, setFocus, startFunc, setStartFunc, friendList, setFriendList
+        play, setPlay, 
+        end, setEnd, 
+        hasScroll, setHasScroll, 
+        focus, setFocus, 
+        startFunc, setStartFunc, 
+        enter, setEnter,
       }}
     >
       {children}
