@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as DialogNextIcon } from '../assets/icons/dialog_next_icon.svg'
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios'  
+import { createUsername } from '../apis/api/user'
 
 export default function Onboarding() {
 
@@ -24,8 +26,6 @@ export default function Onboarding() {
             서비스 내에서 사용할 당신만의 이름을 저장해주세요.
             이름을 저장하면 웰다잉 하숙집에 도착합니다.`
     },
-
-
   ]
   
   const handleDiaglogBox = () => {
@@ -40,13 +40,20 @@ export default function Onboarding() {
     setUserName(e.target.value);
   }
 
+  const handleOnSubmit = async (e) => {
+    e.preventDefault()
+    await createUsername(userName);
+  }
+
   return (
     <>
       <Container>
-        <video width="100%" height="100%" min-width="100%"  autoPlay muted playsInline loop>
-          <source src={process.env.PUBLIC_URL + '/videos/testOnboarding.mp4'} type="video/mp4" />
-          {/* Your browser does not support the video tag. */}
-        </video>
+        <VideoWrapper>
+          <video width="100%" height="100%" min-width="100%"  autoPlay muted playsInline loop>
+            <source src={'/videos/testOnboarding.mp4'} type="video/mp4" />
+          </video>
+        </VideoWrapper>
+
         <ContentBox>
           <p>{DiaglogArr[curIdx].text.toString()}</p>
           {(curIdx === 0 || curIdx === 1) &&
@@ -65,10 +72,9 @@ export default function Onboarding() {
                 placeholder='이름을 입력해주세요.' 
                 onChange={handleChange}
                 required/>
-              <Button onClick={handleDiaglogBox}>저장하기</Button>
+              <Button onClick={handleOnSubmit}>저장하기</Button>
             </InputBox>
           </Footer>
-
           }
         </ContentBox>
       </Container>
@@ -77,23 +83,25 @@ export default function Onboarding() {
 }
 
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
   position: relative;
   display: flex;
   align-items: center;
-  text-align: center;
   justify-content: center;
-  overflow: hidden;
-  object-fit: cover;
-  
+`
 
+const VideoWrapper = styled.div`
+  width: 100vw; 
+  height: 100vh;
+
+  video{
+    object-fit: cover;
+  }
 `
 
 const ContentBox = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
-  position: absolute;
   width: 45%;
   padding: 4rem 11rem;
   background: linear-gradient(223deg, rgba(0, 0, 0, 0.51) 0%, rgba(0, 0, 0, 0.12) 100%);
