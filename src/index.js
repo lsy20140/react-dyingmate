@@ -15,9 +15,11 @@ import PlayerRoom from './pages/PlayerRoom';
 import BucketList from './pages/BucketList';
 import Auth from './pages/Auth';
 import GrandmaRoom from './pages/GrandmaRoom';
-import { RoomFocusProvider } from './contexts/RoomFocus';
 import ManRoom from './pages/ManRoom';
 import WomanRoom from './pages/WomanRoom';
+import Final from './pages/Final';
+import { RoomFocusProvider } from './contexts/RoomFocus';
+
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,7 @@ const router = createBrowserRouter([
       {path: '/gmroom', element: <GrandmaRoom/>},
       {path: '/manroom', element: <ManRoom/>},
       {path: '/womanroom', element: <WomanRoom/>},
+      {path: '/final', element: <Final/>},
       {path: '/bucketlist', element: <BucketList/>},
       {path: '/auth', element: <Auth/>},
 
