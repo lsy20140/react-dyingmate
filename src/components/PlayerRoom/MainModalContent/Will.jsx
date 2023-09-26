@@ -22,7 +22,7 @@ export default function Will() {
   const handleSubmit = async(e) => {
     try{
       await authInstance.post(
-        'will/post', 
+        'will/write', 
         {content: data}
       )
     } catch (error) {
