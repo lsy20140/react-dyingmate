@@ -28,7 +28,7 @@ export default function Phone() {
     setIsSend(true);
     textarea.value = ''
     axios.post(
-      '/api/message/post',
+      '/api/message/send',
       {message: data},
       {withCredentials: true},
       
