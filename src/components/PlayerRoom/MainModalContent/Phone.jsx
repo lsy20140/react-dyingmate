@@ -118,7 +118,7 @@ const Container = styled.div`
   justify-content: center;
   box-sizing: border-box;
   border-radius: 2.5rem;  
-  padding: auto 2.5rem;
+  padding: 2.5rem 2.5rem 0 2.5rem;
   gap: 6rem;
 
 `
