@@ -19,6 +19,7 @@ import ManRoom from './pages/ManRoom';
 import WomanRoom from './pages/WomanRoom';
 import Final from './pages/Final';
 import { RoomFocusProvider } from './contexts/RoomFocus';
+import { AuthContextProvider } from './contexts/AuthContext';
 
 
 const router = createBrowserRouter([
@@ -47,11 +48,14 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <PlayProvider>
-      <RoomFocusProvider>
-        <RouterProvider router={router} />
-      </RoomFocusProvider>
-    </PlayProvider>
+    <AuthContextProvider>
+      <PlayProvider>
+        <RoomFocusProvider>
+          <RouterProvider router={router} />
+        </RoomFocusProvider>
+      </PlayProvider>
+    </AuthContextProvider>
+
     
   </React.StrictMode>
 );

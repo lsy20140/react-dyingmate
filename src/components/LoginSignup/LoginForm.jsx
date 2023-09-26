@@ -5,6 +5,7 @@ import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
 import axios from 'axios'  
+import { useAuthContext } from '../../contexts/AuthContext';
 
 
 export default function LoginForm() {
@@ -13,6 +14,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [pwd, setPwd] = useState('')
   const [showPwd, setShowPwd] = useState()
+  const {token, setToken, login, setLogin} = useAuthContext()
 
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`
   const handleKakaoLogin = ()=>{
@@ -43,18 +45,23 @@ export default function LoginForm() {
       '/api/user/login',
       {
         email: email,
-        pwd: pwd
+        pwd: pwd  
       },
       {withCredentials: true},
     )
     .then((response) => {
       localStorage.setItem('login-token', response.data.data.token);
+      setToken(localStorage.setItem('login-token', response.data.data.token));
+    })
+    .then(() => {
+      setLogin(true)
+      console.log("login 됐나",login)
+      console.log("토큰 저장?",token)
     })
     .catch(function (error) {
         // 오류발생시 실행
         console.log(error.message)
     })
-
   }
 
   const handlePwdHide = () => {
@@ -62,12 +69,9 @@ export default function LoginForm() {
   }
   
 
-  
-
-
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form>
         <FormInput 
           type='text' 
           id='userId' 
@@ -93,7 +97,7 @@ export default function LoginForm() {
 
         <FindInfoText>아이디 / 비밀번호를 잊으셨나요?</FindInfoText>
 
-        <LoginButton>로그인</LoginButton>
+        <LoginButton onClick={handleSubmit}>로그인</LoginButton>
         <SocialLogin>
           <p>간편하게 로그인하기</p>
           <SocialLoginIcons>
