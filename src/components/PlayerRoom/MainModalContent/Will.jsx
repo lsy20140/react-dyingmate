@@ -5,6 +5,7 @@ import willPaper from '../../../assets/img/PlayerRoom/will_paper.png'
 import StyledButton from '../../ui/StyledButton';
 import axios from 'axios'  
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { authInstance } from '../../../apis/utils/api';
 
 
 export default function Will() {
@@ -29,14 +30,29 @@ export default function Will() {
     }
   }
 
+  const handleEdit = (e) => {
+    axios.patch(
+      'https://dying-mate-server.link/will/modify/1',
+      {content: data},
+      {withCredentials: true},
+      
+    )
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
+  }
 
   useEffect(() => {
     axios.get('https://dying-mate-server.link/will/get/1', {
       headers: {Authorization: 'Bearer' + token},
-
     }, )
     .then(function (response) {
       console.log("response.data",response.data)
+      setData(response.data)
     })
     .catch(function (error) {
       console.log(error);
@@ -68,6 +84,7 @@ export default function Will() {
             required
           />
           <StyledButton width={'8rem'} handleOnClick={handleSubmit} text={"완료하기"} btnColor={`var(--main-color)`} />
+          <StyledButton width={'8rem'} handleOnClick={handleEdit} text={"수정하기"} btnColor={`var(--main-color)`} />
         </WillContainer>
       </Container>
     </>   
