@@ -15,8 +15,12 @@ import PlayerRoom from './pages/PlayerRoom';
 import BucketList from './pages/BucketList';
 import Auth from './pages/Auth';
 import GrandmaRoom from './pages/GrandmaRoom';
-import { RoomFocusProvider } from './contexts/RoomFocus';
 import ManRoom from './pages/ManRoom';
+import WomanRoom from './pages/WomanRoom';
+import Final from './pages/Final';
+import { RoomFocusProvider } from './contexts/RoomFocus';
+import { AuthContextProvider } from './contexts/AuthContext';
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,8 @@ const router = createBrowserRouter([
       {path: '/playerroom', element: <PlayerRoom/>},
       {path: '/gmroom', element: <GrandmaRoom/>},
       {path: '/manroom', element: <ManRoom/>},
+      {path: '/womanroom', element: <WomanRoom/>},
+      {path: '/final', element: <Final/>},
       {path: '/bucketlist', element: <BucketList/>},
       {path: '/auth', element: <Auth/>},
 
@@ -42,11 +48,14 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <PlayProvider>
-      <RoomFocusProvider>
-        <RouterProvider router={router} />
-      </RoomFocusProvider>
-    </PlayProvider>
+    <AuthContextProvider>
+      <PlayProvider>
+        <RoomFocusProvider>
+          <RouterProvider router={router} />
+        </RoomFocusProvider>
+      </PlayProvider>
+    </AuthContextProvider>
+
     
   </React.StrictMode>
 );

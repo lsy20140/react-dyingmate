@@ -1,30 +1,60 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components';
 import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
+import axios from 'axios'  
 
 export default function SignUpForm() {
   const navigate = useNavigate()
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
+  const [checkPwd, setCheckPwd] = useState()
   const [showPwd, setShowPwd] = useState([])
 
-  const handleChange = (e) => {
-    const {name, value} = e.target
-    setUser((user) => ({...user, [name]: value}))
+  // const handleChange = (e) => {
+  //   const {name, value} = e.target
+  //   setUser((user) => ({...user, [name]: value}))
+  // }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePwd = (e) => {
+    setPwd(e.target.value)
+  }
+
+  const handleCheckPwd = (e) => {
+    setCheckPwd(e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()  
-    navigate('/onboarding');  
+    // navigate('/onboarding');  
+
+    // 회원가입 post api 연결 필요
+    axios.post(
+      '/api/user/join',
+      {
+        email: email,
+        pwd: pwd
+      },
+      {withCredentials: true},
+    )
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error)
+    })
   }
 
   const handlePwdHide = (idx) => {
     showPwd[idx] = !showPwd[idx]
     setShowPwd([...showPwd])
-    console.log("idx", idx);
-    console.log("showPwd", showPwd)
   }
 
 
@@ -33,21 +63,21 @@ export default function SignUpForm() {
       <form onSubmit={handleSubmit}>
         <FormInput 
           type='text' 
-          id='userId' 
-          name='userId' 
-          value={user.userId ?? ''}
+          id='email' 
+          name='email' 
+          value={email ?? ''}
           placeholder='아이디를 입력해주세요' 
-          onChange={handleChange}
+          onChange={handleEmail}
           required/><br/>  
 
         <PasswordInput>
           <FormInput 
             type={showPwd[0] ? "password" : "text"}
-            id='userPwd' 
-            name='userPwd' 
-            value={user.userPwd ?? ''}
+            id='pwd' 
+            name='pwd' 
+            value={pwd ?? ''}
             placeholder='비밀번호를 입력해주세요' 
-            onChange={handleChange}
+            onChange={handlePwd}
             required
           />
           <img onClick={() => handlePwdHide(0)} src={hide_icon} />
@@ -57,11 +87,11 @@ export default function SignUpForm() {
         <PasswordInput>
           <FormInput 
             type={showPwd[1] ? "password" : "text"}
-            id='userCheckPwd' 
-            name='userCheckPwd' 
-            value={user.userCheckPwd ?? ''}
+            id='checkPwd' 
+            name='checkPwd' 
+            value={checkPwd ?? ''}
             placeholder='비밀번호를 재입력해주세요' 
-            onChange={handleChange}
+            onChange={handleCheckPwd}
             required
           />
           <img onClick={() => handlePwdHide(1)} src={hide_icon} />

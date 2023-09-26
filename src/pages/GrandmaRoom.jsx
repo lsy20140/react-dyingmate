@@ -5,6 +5,10 @@ import {OrbitControls} from '@react-three/drei'
 import CharInitDialog from '../components/ui/CharInitDialog';
 import { CameraControls } from '../Camera';
 import { useRoomFocus } from '../contexts/RoomFocus';
+import { Test_sofa } from '../components/models/GrandmaRoom/Test_sofa';
+import { HueSaturation } from '@react-three/postprocessing'
+import { Grandmother } from '../components/models/GrandmaRoom/Grandmother';
+// import { BlendFunction } from 'postprocessing'
 
 export default function GrandmaRoom() {
   const dialogRef = useRef();
@@ -29,19 +33,22 @@ export default function GrandmaRoom() {
 
   return (
     <>
-      <Canvas camera={{fov: 30, position:[24,8,0]}} colorManagement>
+      <Canvas camera={{fov: 30, position:[24,8,0]}}>
         <OrbitControls/>
         {/* <LightHelper /> */}
         <axesHelper args={[200, 200, 200]} />
-        <ambientLight intensity={0.1} />
-        <directionalLight intensity={1}  decay={2} color="#eca864" position={[ 17, 12.421, -2]} target-position={[0, 9, 2]} />
-        <directionalLight intensity={1.2} castShadow decay={2} color="#d8b58d" position={[22, 15.344, -5]} target-position={[2, 10, 0]} />
+        <ambientLight intensity={5} />
+        <directionalLight intensity={8}  decay={1} color="#daae73" position={[ 5, 8, -2]} target-position={[-5, 8, 2]} />
+        <directionalLight intensity={3} castShadow decay={2} color="#d8b58d" position={[5, 8, -5]} target-position={[2, 10, 0]} />
         <CameraControls position={position} target={target} />
         <group ref={roomRef} rotation-y={-Math.PI} rotation-z={-Math.PI/10} position-y={-5}>
           <GMHome/>
+        </group>        
+        <group>
+          <Grandmother />
         </group>
       </Canvas>
-      {!focus && <CharInitDialog />}
+      {/* {!focus && <CharInitDialog />} */}
       
     </>
   )

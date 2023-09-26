@@ -4,12 +4,17 @@ import styled from 'styled-components';
 import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
+import axios from 'axios'  
+import { useAuthContext } from '../../contexts/AuthContext';
 
 
 export default function LoginForm() {
   const navigate = useNavigate()
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
   const [showPwd, setShowPwd] = useState()
+  const {token, setToken, login, setLogin} = useAuthContext()
 
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`
   const handleKakaoLogin = ()=>{
@@ -19,14 +24,44 @@ export default function LoginForm() {
 
 
 
-  const handleChange = (e) => {
-    const {name, value} = e.target
-    setUser((user) => ({...user, [name]: value}))
+  // const handleChange = (e) => {
+  //   const {name, value} = e.target
+  //   setUser((user) => ({...user, [name]: value}))
+  // }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePwd = (e) => {
+    setPwd(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault()  
-    navigate('/main');  
+    // navigate('/main');  
+
+    await axios.post(
+      '/api/user/login',
+      {
+        email: email,
+        pwd: pwd  
+      },
+      {withCredentials: true},
+    )
+    .then((response) => {
+      localStorage.setItem('login-token', response.data.data.token);
+      setToken(localStorage.setItem('login-token', response.data.data.token));
+    })
+    .then(() => {
+      setLogin(true)
+      console.log("login 됐나",login)
+      console.log("토큰 저장?",token)
+    })
+    .catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
   }
 
   const handlePwdHide = () => {
@@ -34,19 +69,16 @@ export default function LoginForm() {
   }
   
 
-  
-
-
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form>
         <FormInput 
           type='text' 
           id='userId' 
           name='userId' 
-          value={user.userId ?? ''}
+          value={email ?? ''}
           placeholder='아이디를 입력해주세요' 
-          onChange={handleChange}
+          onChange={handleEmail}
           required/><br/>  
 
         <PasswordInput>
@@ -54,9 +86,9 @@ export default function LoginForm() {
             type={showPwd ? "password" : "text"}
             id='userPwd' 
             name='userPwd' 
-            value={user.userPwd ?? ''}
+            value={pwd ?? ''}
             placeholder='비밀번호를 입력해주세요' 
-            onChange={handleChange}
+            onChange={handlePwd}
             required
           />
           <img onClick={handlePwdHide} src={hide_icon} />
@@ -65,7 +97,7 @@ export default function LoginForm() {
 
         <FindInfoText>아이디 / 비밀번호를 잊으셨나요?</FindInfoText>
 
-        <LoginButton>로그인</LoginButton>
+        <LoginButton onClick={handleSubmit}>로그인</LoginButton>
         <SocialLogin>
           <p>간편하게 로그인하기</p>
           <SocialLoginIcons>

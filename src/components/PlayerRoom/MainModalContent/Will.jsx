@@ -4,24 +4,35 @@ import {ReactComponent as MainIcon} from '../../../assets/icons/PlayerRoom/Will/
 import willPaper from '../../../assets/img/PlayerRoom/will_paper.png'
 import StyledButton from '../../ui/StyledButton';
 import axios from 'axios'  
+import { useAuthContext } from '../../../contexts/AuthContext';
+import { authInstance } from '../../../apis/utils/api';
 
 
 export default function Will() {
   let [data, setData] = useState('');
-
+  const {token} = useAuthContext();
   const textarea = useRef();
 
   const handleChange = (e) => {
     setData(e.target.value)
-    console.log(data)
     textarea.current.style.height = '42rem'
     // textarea.current.style.height = textarea.current.scrollHeight + 'px';
   }
 
   const handleSubmit = async(e) => {
-    // 유언장 추가 api 연동  
-    axios.post(
-      'https://dying-mate-server.link/will/post',
+    try{
+      await authInstance.post(
+        'will/post', 
+        {content: data}
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleEdit = (e) => {
+    axios.patch(
+      'https://dying-mate-server.link/will/modify/1',
       {content: data},
       {withCredentials: true},
       
@@ -36,18 +47,16 @@ export default function Will() {
   }
 
   useEffect(() => {
-    axios.get('https://dying-mate-server.link/will/get?willId=11111', {
-
-      
+    axios.get('https://dying-mate-server.link/will/get/1', {
+      headers: {Authorization: 'Bearer' + token},
     }, )
     .then(function (response) {
-      console.log("요청 성공")
       console.log("response.data",response.data)
+      setData(response.data)
     })
     .catch(function (error) {
       console.log(error);
     });
- 
   },[])
 
   return (
@@ -75,6 +84,7 @@ export default function Will() {
             required
           />
           <StyledButton width={'8rem'} handleOnClick={handleSubmit} text={"완료하기"} btnColor={`var(--main-color)`} />
+          <StyledButton width={'8rem'} handleOnClick={handleEdit} text={"수정하기"} btnColor={`var(--main-color)`} />
         </WillContainer>
       </Container>
     </>   
@@ -90,10 +100,9 @@ const Container = styled.div`
   justify-content: center;
   box-sizing: border-box;
   border-radius: 2.5rem;  
-  padding: 2.5rem;
+  padding: 3.75rem 2.5rem 2.5rem 2.5rem;
   gap: 6rem;
   color: white;
-
 `
 const TextArea = styled.div`
   display: flex;
