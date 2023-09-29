@@ -50,6 +50,7 @@ export default function LoginForm() {
       {withCredentials: true},
     )
     .then((response) => {
+      console.log(response)
       localStorage.setItem('login-token', response.data.data.token);
       setToken(localStorage.setItem('login-token', response.data.data.token));
     })

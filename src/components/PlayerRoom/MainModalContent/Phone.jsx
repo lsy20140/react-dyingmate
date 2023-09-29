@@ -6,10 +6,13 @@ import axios from 'axios'
 import StyledButton from '../../ui/StyledButton'
 import {ReactComponent as SendIcon} from '../../../assets/icons/PlayerRoom/Phone/send_icon.svg'
 import { ReactComponent as BubbleVector } from '../../../assets/img/PlayerRoom/message_bubble_vec.svg'
+import { useAuthContext } from '../../../contexts/AuthContext'
 
 export default function Phone() {
   const [data, setData ] = useState('')
   const [isSend, setIsSend] = useState(false);
+
+  const {token} = useAuthContext()
 
   // 날짜 구하기
   const date = new Date();
@@ -21,18 +24,17 @@ export default function Phone() {
   const handleChange = (e) => {
     setData(e.target.value);
     textarea.current.style.height = textarea.current.scrollHeight + 'px';
-    console.log(data)
   }
 
   const handleSubmit = async (e) => {
     setIsSend(true);
     textarea.value = ''
-    axios.post(
-      '/api/message/post',
-      {message: data},
-      {withCredentials: true},
-      
-    )
+    axios.post('/api/message/send', {message: data}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials: true,
+    })
     .then((response) => {
       console.log(response)
         
@@ -43,15 +45,11 @@ export default function Phone() {
   }
 
   useEffect(() => {
-    axios.get('http://43.202.133.134:8080/message/get?messageId=2', {
-
-      
+    axios.get('/api/message/load', {
+      headers: {Authorization: 'Bearer ' + token},
     }, )
     .then(function (response) {
-      console.log("요청 성공")
-      console.log(response.data)
-      // setData(response.data.toString())
-      console.log("data:" , data)
+      console.log(response)
     })
     .catch(function (error) {
       console.log(error);
@@ -111,7 +109,6 @@ export default function Phone() {
 
 const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 11rem); 
   position: absolute;
   display: flex;
   flex-direction: row;

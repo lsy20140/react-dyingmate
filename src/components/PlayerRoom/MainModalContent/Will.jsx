@@ -19,24 +19,32 @@ export default function Will() {
     // textarea.current.style.height = textarea.current.scrollHeight + 'px';
   }
 
-  const handleSubmit = async(e) => {
-    try{
-      await authInstance.post(
-        'will/post', 
-        {content: data}
-      )
-    } catch (error) {
-      console.log(error)
-    }
+  const handleSubmit = (e) => {
+    axios
+    .post('/api/will/write', {content: data}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
   }
 
   const handleEdit = (e) => {
     axios.patch(
-      'https://dying-mate-server.link/will/modify/1',
-      {content: data},
-      {withCredentials: true},
-      
-    )
+      '/api/will/modify', 
+      {content: data}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      })
     .then((response) => {
       console.log(response)
         
@@ -47,12 +55,13 @@ export default function Will() {
   }
 
   useEffect(() => {
-    axios.get('https://dying-mate-server.link/will/get/1', {
-      headers: {Authorization: 'Bearer' + token},
+    console.log("token??",token)
+    axios.get('/api/will/load', {
+      headers: {Authorization: 'Bearer ' + token},
     }, )
     .then(function (response) {
       console.log("response.data",response.data)
-      setData(response.data)
+      setData(response.data.data.content)
     })
     .catch(function (error) {
       console.log(error);
@@ -71,6 +80,7 @@ export default function Will() {
               무엇인가요?</p>
           <p>죽기 전, 가장 떠오르는 사람은 누구인가요? </p>
         </TextArea>
+        {/* form 태그에 onSubmit 추가 */}
         <WillContainer method='POST'>
           <FormInput 
             ref={textarea}
@@ -83,8 +93,8 @@ export default function Will() {
             spellCheck="false"
             required
           />
-          <StyledButton width={'8rem'} handleOnClick={handleSubmit} text={"완료하기"} btnColor={`var(--main-color)`} />
-          <StyledButton width={'8rem'} handleOnClick={handleEdit} text={"수정하기"} btnColor={`var(--main-color)`} />
+          <StyledButton type="submit" width={'8rem'} handleOnClick={handleSubmit} text={"완료하기"} textColor={'white'} btnColor={`var(--main-color)`} />
+          <StyledButton width={'8rem'} handleOnClick={handleEdit} text={"수정하기"} textColor={`var(--font-gray-3)`} btnColor={'#F0EAE0'} />
         </WillContainer>
       </Container>
     </>   
