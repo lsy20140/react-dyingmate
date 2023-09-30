@@ -43,10 +43,11 @@ export default function GrandmaRoom() {
         <CameraControls position={position} target={target} />
         <group ref={roomRef} rotation-y={-Math.PI} rotation-z={-Math.PI/10} position-y={-5}>
           <GMHome/>
+          <group>
+            <Grandmother/>
+          </group>
         </group>        
-        <group>
-          <Grandmother />
-        </group>
+
       </Canvas>
       {/* {!focus && <CharInitDialog />} */}
       
