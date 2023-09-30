@@ -38,5 +38,9 @@ export default function Message({text, trail, onMessageEnded, forceShowFullMessa
 }
 
 const ContentWrapper = styled.div`
-  
+  span{
+    color: white;
+    white-space: pre;
+    font-size: 1.25rem;
+  }
 `

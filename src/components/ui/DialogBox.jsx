@@ -35,7 +35,7 @@ export default function DialogBox({messageArr}) {
         }}
       />
       <NextButton onClick={handleOnClick}>
-          {(curMessage === messageArr.length - 1) ? 'Ok' : <DialogNextIcon />}
+          {(curMessage === messageArr.length - 1) ?  <DialogNextIcon />: <DialogNextIcon />}
           
       </NextButton>
     </Container>
@@ -43,11 +43,25 @@ export default function DialogBox({messageArr}) {
 }
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 3rem;
+  box-sizing: border-box;
 
 `
 const NextButton = styled.div`
-  width: 40rem;
+  width: 100%;
+  
+  & > *{
+    position: absolute;
+    display: flex;
+    right: 4rem;
+    bottom: 3rem;
+  }
 
 `

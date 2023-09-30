@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import InitDialogSrc from '../../assets/img/CharRoom/InitDialogBg.png'
 import DialogBox from './DialogBox'
 
 
 export default function CharInitDialog() {
-  const MessageArr = ["1111111111111111","2222222222222222","3333333333333333333"]
-  return (
-    <CharInitDialogBox>
+  const MessageArr = [`하숙집을 관리하는 주인 할머니의 방 입니다. \n화살표를 눌러 할머니와의 대화를 이어나가보세요!`]
+  const dialogRef = useRef()
 
+  useEffect(() => {
+    console.log("dialogRef",dialogRef)
+  },[])
+  return (
+    <CharInitDialogBox ref={dialogRef}>
       <DialogBox messageArr={MessageArr} />
-      {/* <p>하숙집을 관리하는 주인 할머니의 방 입니다. <br/>
-화살표를 눌러 할머니와의 대화를 이어나가보세요! </p> */}
     </CharInitDialogBox>
   )
 }
@@ -19,7 +21,7 @@ export default function CharInitDialog() {
 const CharInitDialogBox = styled.div`
   position: absolute;
   top: 5rem;
-  right: 21rem;
+  right: 23rem;
   width: 46rem;
   height: 16rem;
   background-image : url(${InitDialogSrc});
