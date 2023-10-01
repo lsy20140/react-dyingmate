@@ -4,7 +4,7 @@ import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Di
 import MethodItem from '../../../Diary/MethodItem'
 import MethodExplain from '../../../Diary/MethodExplain';
 
-export default function StepOne() {
+export default function StepOne({setData}) {
   const [curIdx, setCurIdx] = useState(1);
 
   const data= [
@@ -12,6 +12,11 @@ export default function StepOne() {
     { id: 2, itemText: "화장 후 자연장", explain: `수목장 방식은 자연과 하나되어 남아있는 하나의 장례방식 인데요, \n  자연속에 둘러쌓여 푸른 잎사귀와 향기로운 꽃들로 아름답게 꾸며질 수 있습니다. \n 당신의 많은 추억들이 자연과 하나가 되어 남겨진 사람들을 향해 흘러나올 수 있는 방법입니다. `},
     { id: 3, itemText: "매장", explain: `매장 방신은 공간에서 사랑하는 이들과 함께하는 장례방법입니다. \n \n 사랑하는 사람들이 편안하고 평화로운 곳에서 쉬어갈 수 있도록 고정적인 장소를 마련해 장례를 진행하는 하나의 방식입니다. `},
   ]
+
+  useEffect(() => {
+    setData((data) => ({...data, 'method': curIdx}))
+  },[curIdx])
+
   return (
     <Content>
       <TextArea>

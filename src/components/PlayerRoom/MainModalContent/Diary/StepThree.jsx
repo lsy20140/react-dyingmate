@@ -4,7 +4,7 @@ import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Di
 import UploadFrameSrc from '../../../../assets/img/PlayerRoom/upload_frame.png'
 import UploadBoxSrc from '../../../../assets/img/PlayerRoom/upload_box.png'
 
-export default function StepThree() {
+export default function StepThree({setData}) {
   const fileInput = useRef(null)
   const [selectImg, setSelectImg] = useState()
 
@@ -16,8 +16,11 @@ export default function StepThree() {
 
     if(name === 'file') {
       setSelectImg(files && files[0]);
+      console.log("files", files[0])
+      setData((data) => ({...data, 'portrait_photo': files[0]}))
       return;
     }
+
   };
 
   return (

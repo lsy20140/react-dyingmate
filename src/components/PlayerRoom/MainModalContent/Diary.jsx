@@ -11,6 +11,7 @@ import ProgressBar from '../../Diary/ProgressBar'
 export default function Diary() {
   const [comp, setComp] = useState()
   const [curIdx, setCurIdx] = useState(1)
+  const [data, setData] = useState({})
 
   const handleIndex = (side, e) => {
     if(side === 'prev'){
@@ -31,18 +32,20 @@ export default function Diary() {
   }
 
   useEffect(() => {
+    console.log("현재 저장된 data", data)
+
     switch(curIdx) {
       case 1:
-        setComp(<StepOne/>)
+        setComp(<StepOne setData={setData}/>)
         break;
       case 2:
-        setComp(<StepTwo/>)
+        setComp(<StepTwo setData={setData}/>)
         break;
       case 3:
-        setComp(<StepThree/>)
+        setComp(<StepThree setData={setData}/>)
         break;
       case 4:
-        setComp(<StepFinal/>)
+        setComp(<StepFinal data={data}/>)
         break;
     }
   },[curIdx])

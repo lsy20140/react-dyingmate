@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
+import axios from 'axios'  
+import { useAuthContext } from '../../../../contexts/AuthContext'
 
-export default function StepFinal() {
+export default function StepFinal({data}) {
+  const formData = new FormData()
+  const {token} = useAuthContext()
+
+
+  useEffect(() => {
+    for ( const key in data ) {
+      formData.append(key, data[key]);
+    }
+    axios
+    .post('/api/funeral/save', formData, {
+      headers: {
+        'Content-Type' : 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+        
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
+  },[])
+
   return (
     <Content>
       <TextArea>
