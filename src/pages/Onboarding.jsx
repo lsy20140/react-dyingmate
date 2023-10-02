@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as DialogNextIcon } from '../assets/icons/dialog_next_icon.svg'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'  
+import { useLocation } from 'react-router-dom'
 import { createUsername } from '../apis/api/user'
+import { useAuthContext } from '../contexts/AuthContext'
 
 export default function Onboarding() {
-
   const navigate = useNavigate()
   const [curIdx, setCurIdx] = useState(0);
   const [userName, setUserName] = useState('')
+
+  const location = useLocation();
+  const {email, pwd} = location.state
+  const {token, setToken, setLogin} = useAuthContext()
 
   const DiaglogArr = [
     { text: `바쁘고 치열한 현재의 삶이 너무 힘들어 스스로에 대해 깊게 생각해 볼 기회가 없던 당신은
@@ -27,6 +32,29 @@ export default function Onboarding() {
             이름을 저장하면 웰다잉 하숙집에 도착합니다.`
     },
   ]
+
+  useEffect(() => {
+    axios.post(
+      '/api/user/login',
+      {
+        email: email,
+        pwd: pwd  
+      },
+      {withCredentials: true},
+    )
+    .then((response) => {
+      console.log(response)
+      localStorage.setItem('login-token', response.data.data.token);
+      setToken(localStorage.getItem('login-token'));
+    })
+    .then(() => {
+      setLogin(true)
+    })
+    .catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
+  },[])
   
   const handleDiaglogBox = () => {
     if(curIdx === DiaglogArr.length-1){
@@ -40,9 +68,22 @@ export default function Onboarding() {
     setUserName(e.target.value);
   }
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault()
-    await createUsername(userName);
+    axios
+    .post(`/api/user/${userName}/save`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
   }
 
   return (
