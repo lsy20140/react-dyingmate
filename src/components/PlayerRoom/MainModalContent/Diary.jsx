@@ -13,7 +13,7 @@ import { useAuthContext } from '../../../contexts/AuthContext'
 export default function Diary() {
   const [comp, setComp] = useState()
   const [curIdx, setCurIdx] = useState(1)
-  const [diary, setDiary] = useState({})
+  const [diary, setDiary] = useState()
   const {token} = useAuthContext()
 
 

@@ -5,6 +5,9 @@ import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
 import axios from 'axios'  
+import { useAuthContext } from '../../contexts/AuthContext';
+import {GoCheckCircleFill} from 'react-icons/go'
+import {IoMdAlert} from 'react-icons/io'
 
 export default function SignUpForm() {
   const navigate = useNavigate()
@@ -13,6 +16,8 @@ export default function SignUpForm() {
   const [pwd, setPwd] = useState('')
   const [checkPwd, setCheckPwd] = useState()
   const [showPwd, setShowPwd] = useState([])
+  const [isEmailValid, setIsEmailValid] = useState(null)
+  const {token} = useAuthContext()
 
   // const handleChange = (e) => {
   //   const {name, value} = e.target
@@ -30,6 +35,17 @@ export default function SignUpForm() {
     setCheckPwd(e.target.value)
   }
 
+  const handleCheckEmail = () => {
+    axios.get(`/api/user/email/exists/${email}`,{} )
+    .then(function (response) {
+      console.log('response.data', response.data)
+      setIsEmailValid(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()  
     // navigate('/onboarding');  
@@ -43,8 +59,10 @@ export default function SignUpForm() {
       },
       {withCredentials: true},
     )
-    .then((response) => {
-      console.log(response)
+    .then((res) => {
+      if(res.status === 200){
+        navigate('/onboarding',{state: {email: email, pwd: pwd}})
+      }
         
     }).catch(function (error) {
         // 오류발생시 실행
@@ -58,17 +76,30 @@ export default function SignUpForm() {
   }
 
 
+
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <FormInput 
-          type='text' 
-          id='email' 
-          name='email' 
-          value={email ?? ''}
-          placeholder='아이디를 입력해주세요' 
-          onChange={handleEmail}
-          required/><br/>  
+        <EmailInputWrapper>
+          <FormInput 
+            type='text' 
+            id='email' 
+            name='email' 
+            value={email ?? ''}
+            placeholder='아이디를 입력해주세요' 
+            onChange={handleEmail}
+            required/>
+          <EmailCheckBtn onClick={handleCheckEmail}>중복확인</EmailCheckBtn>
+        </EmailInputWrapper>
+        <EmailCheckText>
+          {
+            isEmailValid ? <GoCheckCircleFill /> : <IoMdAlert/>
+          }
+          {
+            isEmailValid ? <p>사용 가능한 아이디 입니다. </p> : <p>중복된 아이디 입니다! 다시 한번 입력해주세요.</p>
+          }
+        </EmailCheckText>
+
 
         <PasswordInput>
           <FormInput 
@@ -97,7 +128,7 @@ export default function SignUpForm() {
           <img onClick={() => handlePwdHide(1)} src={hide_icon} />
 
         </PasswordInput>
-        <LoginButton>회원가입</LoginButton>
+        <LoginButton onClick={handleSubmit}>회원가입</LoginButton>
         <SocialLogin>
           <p>간편하게 로그인하기</p>
           <SocialLoginIcons>
@@ -106,7 +137,6 @@ export default function SignUpForm() {
           </SocialLoginIcons>
 
         </SocialLogin>
-      </form>
 
     </>
   )
@@ -127,6 +157,31 @@ const PasswordInput = styled.div`
     right: 0.5rem;
   }
 
+`
+
+const EmailInputWrapper = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  height: 3rem;
+`
+
+const EmailCheckBtn = styled.button`
+  width: 6.8rem;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  flex-shrink: 0;
+
+`
+
+const EmailCheckText = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  color: var(--main-color);
+  margin: 0.5rem 0;
+  align-items: center;
 `
 
 const FormInput = styled.input`

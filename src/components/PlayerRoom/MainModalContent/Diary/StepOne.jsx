@@ -17,8 +17,8 @@ export default function StepOne({diary, setDiary}) {
     setDiary((data) => ({...data, 'method': curIdx}))
     console.log("diary", diary)
     console.log("diary의 method value", diary.method)
-    setCurIdx(diary.method)
-  },[curIdx])
+    // setCurIdx(diary && diary.method)
+  },[curIdx, diary])
 
   return (
     <Content>
@@ -39,7 +39,7 @@ export default function StepOne({diary, setDiary}) {
             ))
           }
         </ul>
-        <MethodExplain explain={data[curIdx-1].explain} />
+        <MethodExplain explain={diary && data[curIdx-1].explain} />
       </Main>
     </Content>
 
