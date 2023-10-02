@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
 import UploadFrameSrc from '../../../../assets/img/PlayerRoom/upload_frame.png'
 import UploadBoxSrc from '../../../../assets/img/PlayerRoom/upload_box.png'
 
-export default function StepThree({setData}) {
+export default function StepThree({diary, setDiary}) {
   const fileInput = useRef(null)
   const [selectImg, setSelectImg] = useState()
 
@@ -17,11 +17,17 @@ export default function StepThree({setData}) {
     if(name === 'file') {
       setSelectImg(files && files[0]);
       console.log("files", files[0])
-      setData((data) => ({...data, 'portrait_photo': files[0]}))
+      setDiary((data) => ({...data, 'portrait_photo': files[0]}))
       return;
     }
 
   };
+
+  useEffect(() => {
+    console.log("diary", diary)
+    console.log("diary portrait_photo", diary.portrait_photo)
+    setSelectImg(diary.portrait_photo)
+  })
 
   return (
     <Content>

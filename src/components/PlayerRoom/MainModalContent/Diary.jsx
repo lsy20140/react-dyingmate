@@ -7,11 +7,16 @@ import StepFinal from './Diary/StepFinal'
 import {ReactComponent as PrevButton} from '../../../assets/icons/PlayerRoom/Diary/prev_btn.svg'
 import {ReactComponent as NextButton} from '../../../assets/icons/PlayerRoom/Diary/next_btn.svg'
 import ProgressBar from '../../Diary/ProgressBar'
+import axios from 'axios'
+import { useAuthContext } from '../../../contexts/AuthContext'
 
 export default function Diary() {
   const [comp, setComp] = useState()
   const [curIdx, setCurIdx] = useState(1)
-  const [data, setData] = useState({})
+  const [diary, setDiary] = useState({})
+  const {token} = useAuthContext()
+
+
 
   const handleIndex = (side, e) => {
     if(side === 'prev'){
@@ -32,20 +37,30 @@ export default function Diary() {
   }
 
   useEffect(() => {
-    console.log("현재 저장된 data", data)
+    axios.get('/api/funeral/select', {
+      headers: {Authorization: 'Bearer ' + token},
+    }, )
+    .then(function (response) {
+      console.log("response.data.data", response.data.data)
+      setDiary(response.data.data)
+      console.log(diary)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
     switch(curIdx) {
       case 1:
-        setComp(<StepOne setData={setData}/>)
+        setComp(<StepOne diary={diary} setDiary={setDiary}/>)
         break;
       case 2:
-        setComp(<StepTwo setData={setData}/>)
+        setComp(<StepTwo diary={diary} setDiary={setDiary}/>)
         break;
       case 3:
-        setComp(<StepThree setData={setData}/>)
+        setComp(<StepThree diary={diary} setDiary={setDiary}/>)
         break;
       case 4:
-        setComp(<StepFinal data={data}/>)
+        setComp(<StepFinal diary={diary}/>)
         break;
     }
   },[curIdx])

@@ -4,7 +4,7 @@ import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Di
 import MethodItem from '../../../Diary/MethodItem'
 import MethodExplain from '../../../Diary/MethodExplain';
 
-export default function StepOne({setData}) {
+export default function StepOne({diary, setDiary}) {
   const [curIdx, setCurIdx] = useState(1);
 
   const data= [
@@ -14,7 +14,10 @@ export default function StepOne({setData}) {
   ]
 
   useEffect(() => {
-    setData((data) => ({...data, 'method': curIdx}))
+    setDiary((data) => ({...data, 'method': curIdx}))
+    console.log("diary", diary)
+    console.log("diary의 method value", diary.method)
+    setCurIdx(diary.method)
   },[curIdx])
 
   return (

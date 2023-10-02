@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
 import GraveStoneSrc from '../../../../assets/img/PlayerRoom/diary_gravestone.png'
 
-export default function StepTwo({setData}) {
+export default function StepTwo({diary, setDiary}) {
 
   const [stoneText, setStoneText] = useState('');
   const [isDone, setIsDone] = useState(false)
@@ -16,8 +16,12 @@ export default function StepTwo({setData}) {
     setIsDone(true);
     // 묘비명 저장, 수정 api 연동
     // 묘비 오브젝트에 묘비명 적용된 컴포넌트로 전환
-    setData((data) => ({...data, 'epitaph': stoneText}))
+    setDiary((data) => ({...data, 'epitaph': stoneText}))
   }
+
+  useEffect(() => {
+    stoneText(diary.epitaph)
+  },[])
 
   return (
     <Content>
