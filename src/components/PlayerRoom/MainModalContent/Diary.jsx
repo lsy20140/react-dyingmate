@@ -7,16 +7,10 @@ import StepFinal from './Diary/StepFinal'
 import {ReactComponent as PrevButton} from '../../../assets/icons/PlayerRoom/Diary/prev_btn.svg'
 import {ReactComponent as NextButton} from '../../../assets/icons/PlayerRoom/Diary/next_btn.svg'
 import ProgressBar from '../../Diary/ProgressBar'
-import axios from 'axios'
-import { useAuthContext } from '../../../contexts/AuthContext'
 
 export default function Diary() {
   const [comp, setComp] = useState()
   const [curIdx, setCurIdx] = useState(1)
-  const [diary, setDiary] = useState()
-  const {token} = useAuthContext()
-
-
 
   const handleIndex = (side, e) => {
     if(side === 'prev'){
@@ -33,34 +27,22 @@ export default function Diary() {
       }
       setCurIdx(curIdx + 1)
     }
-
   }
 
   useEffect(() => {
-    axios.get('/api/funeral/select', {
-      headers: {Authorization: 'Bearer ' + token},
-    }, )
-    .then(function (response) {
-      console.log("response.data.data", response.data.data)
-      setDiary(response.data.data)
-      console.log(diary)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 
     switch(curIdx) {
       case 1:
-        setComp(<StepOne diary={diary} setDiary={setDiary}/>)
+        setComp(<StepOne/>)
         break;
       case 2:
-        setComp(<StepTwo diary={diary} setDiary={setDiary}/>)
+        setComp(<StepTwo/>)
         break;
       case 3:
-        setComp(<StepThree diary={diary} setDiary={setDiary}/>)
+        setComp(<StepThree/>)
         break;
       case 4:
-        setComp(<StepFinal diary={diary}/>)
+        setComp(<StepFinal/>)
         break;
     }
   },[curIdx])

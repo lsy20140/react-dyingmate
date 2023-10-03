@@ -12,7 +12,7 @@ const axiosAuthApi = () => {
 
   const instance =  axios.create({
     baseURL: '/api/',
-    headers: {Authorization: 'Bearer' + token},
+    headers: {Authorization: 'Bearer ' + token},
     withCredentials: true
   })
   return instance

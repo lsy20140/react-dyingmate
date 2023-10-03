@@ -20,6 +20,7 @@ import WomanRoom from './pages/WomanRoom';
 import Final from './pages/Final';
 import { RoomFocusProvider } from './contexts/RoomFocus';
 import { AuthContextProvider } from './contexts/AuthContext';
+import { DiaryContextProvider } from './contexts/DiaryContext';
 
 
 const router = createBrowserRouter([
@@ -50,9 +51,12 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <PlayProvider>
-        <RoomFocusProvider>
-          <RouterProvider router={router} />
-        </RoomFocusProvider>
+        <DiaryContextProvider>
+          <RoomFocusProvider>
+            <RouterProvider router={router} />
+          </RoomFocusProvider>
+        </DiaryContextProvider>
+
       </PlayProvider>
     </AuthContextProvider>
 

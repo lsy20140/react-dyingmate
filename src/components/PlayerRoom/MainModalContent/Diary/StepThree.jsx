@@ -3,20 +3,18 @@ import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
 import UploadFrameSrc from '../../../../assets/img/PlayerRoom/upload_frame.png'
 import UploadBoxSrc from '../../../../assets/img/PlayerRoom/upload_box.png'
+import { useDiaryContext } from '../../../../contexts/DiaryContext'
 
-export default function StepThree({diary, setDiary}) {
+export default function StepThree() {
   const fileInput = useRef(null)
   const [selectImg, setSelectImg] = useState()
+  const {diary, setDiary} = useDiaryContext()
 
-  const handleUploadFile = () => {
-    // 파일 업로드 api 연동
-  }
   const handleChange = (e) => {
     const {name, value, files} = e.target;
 
     if(name === 'file') {
       setSelectImg(files && files[0]);
-      console.log("files", files[0])
       setDiary((data) => ({...data, 'portrait_photo': files[0]}))
       return;
     }
@@ -24,19 +22,19 @@ export default function StepThree({diary, setDiary}) {
   };
 
   useEffect(() => {
-    console.log("diary", diary)
-    console.log("diary portrait_photo", diary.portrait_photo)
+    console.log("Step three diary", diary)
+    console.log("Step three diary.portrait_photo", diary.portrait_photo)
     setSelectImg(diary.portrait_photo)
-  })
+    console.log("selectImg", selectImg)
+  },[])
 
   return (
     <Content>
       <UploadBox>
-        <img src={UploadFrameSrc} onClick={handleUploadFile}/>
-        <img src={selectImg ? URL.createObjectURL(selectImg) : UploadBoxSrc } />
+        <img src={UploadFrameSrc}/>
+        {/* <img src={selectImg ? URL.createObjectURL(selectImg) : UploadBoxSrc } /> */}
         <input type="file" name='file' ref={fileInput} accept='.png, .jpg,image/*' onChange={handleChange}/>
       </UploadBox>
-
       <TextArea>
         <MainIcon/>
         <Text>

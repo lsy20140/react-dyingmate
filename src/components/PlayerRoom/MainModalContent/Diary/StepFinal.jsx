@@ -3,22 +3,22 @@ import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
 import axios from 'axios'  
 import { useAuthContext } from '../../../../contexts/AuthContext'
+import { useDiaryContext } from '../../../../contexts/DiaryContext'
 
-export default function StepFinal({data}) {
+export default function StepFinal() {
   const formData = new FormData()
   const {token} = useAuthContext()
-
+  const {diary} = useDiaryContext()
 
   useEffect(() => {
-    for ( const key in data ) {
-      formData.append(key, data[key]);
+    for ( const key in diary ) {
+      formData.append(key, diary[key]);
     }
     axios
     .post('/api/funeral/save', formData, {
       headers: {
         'Content-Type' : 'multipart/form-data',
         'Authorization': `Bearer ${token}`,
-        
       },
       withCredentials: true,
     })

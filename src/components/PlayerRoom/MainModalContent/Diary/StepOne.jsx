@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import {ReactComponent as MainIcon} from '../../../../assets/icons/PlayerRoom/Diary/main_icon.svg'
 import MethodItem from '../../../Diary/MethodItem'
 import MethodExplain from '../../../Diary/MethodExplain';
+import { useDiaryContext } from '../../../../contexts/DiaryContext';
+import { getDiary } from '../../../../apis/api/PlayerRoom/diary';
 
-export default function StepOne({diary, setDiary}) {
-  const [curIdx, setCurIdx] = useState(1);
+export default function StepOne() {
+  const {diary, setDiary} = useDiaryContext()
+  const [curIdx, setCurIdx] = useState(diary && diary.method);
 
   const data= [
     { id: 1, itemText: "화장 후 봉안", explain: `화장을 통해 향기로운 아름다움을 간직해볼 수 있습니다. \n \n 화장은 당신의 존재와 흔적을 살아있는 불꽃으로 옮기며, \n 당신의 애도와 사랑을 함께 전달할 수 있습니다. \n 이것은 고인을 위로하고, 그들이 향하는 곳에서 편안함과 평화를 느낄 수 있는 방법으로 알려져 있습니다. `},
@@ -14,11 +17,21 @@ export default function StepOne({diary, setDiary}) {
   ]
 
   useEffect(() => {
+    getDiary()
+    .then((res) => {
+      console.log("Step one comp res",res.data)
+      setDiary(() => ({...res.data}))
+    })
+    .then(() => {
+      console.log("StepOne diary", diary)
+      setCurIdx(diary.method)
+    })
+  },[])
+
+  useEffect(() => {
     setDiary((data) => ({...data, 'method': curIdx}))
-    console.log("diary", diary)
-    console.log("diary의 method value", diary.method)
-    // setCurIdx(diary && diary.method)
-  },[curIdx, diary])
+  },[curIdx])
+
 
   return (
     <Content>
@@ -39,7 +52,7 @@ export default function StepOne({diary, setDiary}) {
             ))
           }
         </ul>
-        <MethodExplain explain={diary && data[curIdx-1].explain} />
+        <MethodExplain explain={curIdx && data[curIdx-1].explain} />
       </Main>
     </Content>
 
@@ -56,7 +69,6 @@ const TextArea = styled.div`
   width: 100%;
   gap: 1.8rem;
   margin-bottom: 3.75rem;
- 
 `
 
 const Text = styled.div`
