@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { DirectionalLightHelper } from "three";
 import { useHelper} from "@react-three/drei";
 import { CameraControls } from '../Camera';
@@ -14,18 +14,14 @@ import { Shelf } from '../components/models/Shelf';
 import { Desktop } from '../components/models/Desktop';
 import FriendListModal from '../components/PlayerRoom/FriendListModal';
 import { Room } from '../components/models/PlayerRoom/Room';
-
-import { Selection, Select, EffectComposer, Outline } from '@react-three/postprocessing'
-
+import ModalButton from '../components/PlayerRoom/FriendList/ModalButton';
 
 export default function PlayerRoom() {
   const light1 = useRef()
   const light2 = useRef()
 
   const {focus, setFocus} = usePlay();
-  const {friendList, setFriendList} = usePlay();
-
-  const boardRef = useRef();
+  const [friendListModal, setFriendListModal] = useState(false)
 
   const [curIdx, setCurIdx] = useState(0);
 
@@ -38,7 +34,6 @@ export default function PlayerRoom() {
     setCurIdx(0)
   }
   
-
   const handleClick = (idx) => {
     let position = { x: 0, y: 0, z: 0 };
     let target = { x: 0, y: 0, z: 0 };
@@ -71,7 +66,6 @@ export default function PlayerRoom() {
       setPosition(position)
       setTarget(target)
     }
-
   }
 
   useEffect(() => {
@@ -79,19 +73,16 @@ export default function PlayerRoom() {
       const delayFunc = setTimeout(() => {
         setFocus(true)
       }, 2500)
-
       return () => clearTimeout(delayFunc)
     }
     
   },[curIdx])
 
 
-
-  const LightHelper = () => {
-    useHelper(light1, DirectionalLightHelper, 1, "red");
-    useHelper(light2, DirectionalLightHelper, 1, "blue");
-  }
-
+  // const LightHelper = () => {
+  //   useHelper(light1, DirectionalLightHelper, 1, "red");
+  //   useHelper(light2, DirectionalLightHelper, 1, "blue");
+  // }
 
 
   return (
@@ -100,15 +91,15 @@ export default function PlayerRoom() {
         {/* <LightHelper /> */}
         <axesHelper args={[200, 200, 200]} />
         <ambientLight intensity={0.1} />
-        <directionalLight ref={light1} intensity={1.5}  decay={2} color="#eca864" position={[ 17, 12.421, -2]} target-position={[0, 9, 2]} />
-        <directionalLight ref={light2} intensity={1.2} castShadow decay={2} color="#d8b58d" position={[22, 15.344, -5]} target-position={[2, 10, 0]} />
+        <directionalLight ref={light1} intensity={1}  decay={2} color="#eca864" position={[ 17, 12.421, -2]} target-position={[0, 9, 2]} />
+        <directionalLight ref={light2} intensity={1} castShadow decay={2} color="#d8b58d" position={[22, 15.344, -5]} target-position={[2, 10, 0]} />
         <CameraControls position={position} target={target} />
         <group rotation-y={-Math.PI}>
           <Room/>
           <group onClick={() => handleClick(1)}>
             <WillPaper/>
           </group>
-          <group ref={boardRef} onClick={() => handleClick(2)}>
+          <group onClick={() => handleClick(2)}>
             <BoardForLightingmap/>  
           </group>
           <group onClick={() => handleClick(3)}>
@@ -125,24 +116,13 @@ export default function PlayerRoom() {
           </group>
         </group>
       </Canvas>
-      {/* <Will/> */}
       { focus && <ModalOverlay setCamera={setCamera} curIdx={curIdx} />}
 
-
-      {/* <div onClick={() => {handleClick(10); setFriendList(true)}}>
-        <FriendListButton src={kakao_icon}/>
+      {/* 친구 목록 */}
+      <div onClick={() => {handleClick(10); setFriendListModal(true)}}>
+        <ModalButton />
       </div>
-
-      { friendList && <FriendListModal/> } */}
-
+      {friendListModal && <FriendListModal setFriendListModal={setFriendListModal}/>}
     </>
-
   )
 }
-
-const FriendListButton = styled.img`
-  width: 5rem;
-  height: 5rem;
-  z-index:999;
-
-`

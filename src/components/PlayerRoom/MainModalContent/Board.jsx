@@ -1,52 +1,63 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
-import BoardSrc from '../../../assets/img/PlayerRoom/board.png'
+import BoardSrc4 from '../../../assets/img/PlayerRoom/boardSrc4.png'
+import BoardSrc5 from '../../../assets/img/PlayerRoom/boardSrc5.png'
 import NewTextPost from './Board/NewTextPost'
 import NewImagePost from './Board/NewImagePost'
 import AddPostModal from './Board/AddPostModal'
 
 export default function Board() {
   const [openModal, setOpenModal] = useState(false)
-  const pos = useState({'posX': 10, 'posY': 10})
-
+  const pos = useState({'posX': 402, 'posY': 376})
 
   const handleOnClick = () => {
     setOpenModal(true)
-    console.log(openModal)
   }
+
+  // const handlePosition = (e) => {
+  //   window.addEventListener('click', (e) => {
+  //     console.log('clientX',e.clientX)
+  //     console.log('clientY',e.clientY)
+  //   })
+  // }
 
   return (
     <>
       <Container>
         <BoardContainer>
           <NewPostWrapper>
-            <NewTextPost handleOnClick={handleOnClick}/>
+            <NewTextPost handleOnClick={handleOnClick} />
             <NewImagePost />
             <NewTextPost />
           </NewPostWrapper>
+          <PostWrapper onClick={handlePosition()}>
+            {/* 생성한 post 보여주기  */}
+          </PostWrapper>
         </BoardContainer>
       </Container>
       <AddPostModal openModal={openModal} setOpenModal={setOpenModal} pos={pos} />
     </>
-
   )
 }
 
 const Container = styled.div`
   height: calc(100vh - 12rem); 
-  padding: 2rem 6.25rem 0 6.25rem;
+  padding: 0 6.25rem 0 6.25rem;
   box-sizing: border-box;
+  z-index: 999;
+  position: relative;
 `
 
 const BoardContainer = styled.div`
   position: relative;
+  width: 100%;
   height: 100%;
-  // background-image: url(${BoardSrc});
-  background-repeat: no-repeat;
-  background-color: #A97A47;
-  border: 3px solid white;
+  // background: url(${BoardSrc5}) no-repeat center;
+  background-color: #D9995D;
+  border: 5px solid white;
   box-sizing: border-box;
   border-radius: 2.5rem;  
+  background-size: fill;
 `
 const NewPostWrapper = styled.div`
   position: absolute;
@@ -56,7 +67,7 @@ const NewPostWrapper = styled.div`
   top: 50%;
   transform: translate(0, -50%);
   border-radius: 1.25rem;
-  background-color: #BFC0C1;
+  background-color: #CAAE86;
   box-shadow: -7px 4px 14px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
@@ -72,4 +83,13 @@ const NewPostWrapper = styled.div`
       transition: transform 0.2s;
     }
   }
+`
+
+const PostWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-left: 5rem; 
 `

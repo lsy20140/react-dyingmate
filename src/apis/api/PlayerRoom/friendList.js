@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { defaultInstance } from '../../utils/api'
 
 export const getAllFriends = async () => {

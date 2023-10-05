@@ -7,7 +7,7 @@ import OneRequestItem from './FriendList/OneRequestItem'
 import axios from 'axios'
 import { getAllFriends, getAllRequests } from '../../apis/api/PlayerRoom/friendList'
 
-export default function FriendListModal() {
+export default function FriendListModal({setFriendListModal}) {
   const [searchInput, setSearchInput] = useState('')
   
   const [friendList, setFriendList] = useState([])
@@ -38,7 +38,7 @@ export default function FriendListModal() {
             <MainIcon/>
             <p>친구 목록</p>
           </HeaderTitle>
-          <IoIosClose/>
+          <IoIosClose onClick={() => setFriendListModal()}/>
         </Header>  
         <InputWrapper>
           <SearchInput onChange={handleOnChange} placeholder='사용자의 이름을 입력하세요.' value={searchInput ?? ''}/>
