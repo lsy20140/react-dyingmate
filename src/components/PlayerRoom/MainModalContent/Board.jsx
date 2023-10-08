@@ -8,34 +8,24 @@ import AddPostModal from './Board/AddPostModal'
 
 export default function Board() {
   const [openModal, setOpenModal] = useState(false)
-  const pos = useState({'posX': 402, 'posY': 376})
-
-  const handleOnClick = () => {
-    setOpenModal(true)
-  }
-
-  // const handlePosition = (e) => {
-  //   window.addEventListener('click', (e) => {
-  //     console.log('clientX',e.clientX)
-  //     console.log('clientY',e.clientY)
-  //   })
-  // }
 
   return (
     <>
       <Container>
         <BoardContainer>
           <NewPostWrapper>
-            <NewTextPost handleOnClick={handleOnClick} />
+            <NewTextPost handleOnClick={() => setOpenModal(true)}/>
             <NewImagePost />
             <NewTextPost />
           </NewPostWrapper>
-          <PostWrapper onClick={handlePosition()}>
+          <PostWrapper>
             {/* 생성한 post 보여주기  */}
           </PostWrapper>
         </BoardContainer>
       </Container>
-      <AddPostModal openModal={openModal} setOpenModal={setOpenModal} pos={pos} />
+      {openModal && <AddPostModal setOpenModal={setOpenModal}/>}
+      
+      
     </>
   )
 }

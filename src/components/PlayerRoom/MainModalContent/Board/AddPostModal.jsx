@@ -3,41 +3,61 @@ import styled from 'styled-components'
 import {IoIosClose} from 'react-icons/io'
 import IconStyledButton from '../../../ui/IconStyledButton'
 import { addBucketlist } from '../../../../apis/api/PlayerRoom/bucketlist'
+import { getRandomX, getRandomY } from '../../../../apis/utils/PlayerRoom/getRandomPosition'
+import { useAuthContext } from '../../../../contexts/AuthContext'
+import axios from 'axios'
 
-export default function AddPostModal({openModal, setOpenModal, pos}) {
-  const [content, setContent] = useState('')
+export default function AddPostModal({setOpenModal}) {
+  const [post, setPost] = useState({})
+  const [photo, setPhoto] = useState()
+  const formData = new FormData()
+  const {token} = useAuthContext()
 
   const handleChange = (e) => {
-    setContent(e.target.value)
-
+    const {name, value, files} = e.target
+    setPost((post) => ({...post, 'title': 'title', 'photo':null, 'xLoc': getRandomX, 'yLoc': getRandomY, [name]:value}))
+    if(name === 'file') {
+      setPhoto(files && files[0]);
+      setPost((post) => ({...post, 'photo': files[0]}))
+      return
+    }
+    console.log("post", post)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()  
-    // 저장
-
-    try{
-      const {data} = await addBucketlist(content, pos)
-      return data
+    for ( const key in post ) {
+      formData.append(key, post[key]);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
+    await axios
+    .post('/api/bucketlist/add', formData, {
+      headers: {
+        'Content-Type' : 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response)
+        
+    }).catch(function (error) {
+        // 오류발생시 실행
+        console.log(error.message)
+    })
 
-  const handleModal = () => {
-    setOpenModal(!openModal)
+
+    저장
+
+
   }
 
 
   return (
     <>
-      {
-        openModal && 
-        <Overlay>
+      <Overlay>
         <ModalContainer>
           <CloseHeader>
-            <IoIosClose onClick={handleModal}/>
+            <IoIosClose onClick={() => setOpenModal()}/>
           </CloseHeader>  
           <Wrapper>
             <Header>
@@ -47,9 +67,9 @@ export default function AddPostModal({openModal, setOpenModal, pos}) {
             <Main method='POST'>
               <FormInput 
                 type={"text"}
-                id='bucketlist' 
-                name='bucketlist' 
-                value={content ?? ''}
+                id='content' 
+                name='content' 
+                value={post.content ?? ''}
                 onChange={handleChange}
                 placeholder='내용을 입력하세요.' 
                 spellCheck="false"
@@ -62,7 +82,7 @@ export default function AddPostModal({openModal, setOpenModal, pos}) {
           </Wrapper>
         </ModalContainer>
       </Overlay>
-      }
+
     </>
 
 
@@ -81,6 +101,7 @@ const Overlay = styled.div`
   transform: translate(-50%, -50%);
   align-items: center;
   justify-content: center;
+  z-index:999;
 `
 
 const ModalContainer = styled.div`
