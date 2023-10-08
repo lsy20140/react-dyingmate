@@ -25,7 +25,6 @@ export default function AddPostModal({setOpenModal}) {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()  
     for ( const key in post ) {
       formData.append(key, post[key]);
     }
