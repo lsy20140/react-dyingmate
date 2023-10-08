@@ -44,11 +44,6 @@ export default function AddPostModal({setOpenModal}) {
         // 오류발생시 실행
         console.log(error.message)
     })
-
-
-    저장
-
-
   }
 
 
@@ -76,7 +71,7 @@ export default function AddPostModal({setOpenModal}) {
                 required
               />
               <ButtonWrapper>
-                <IconStyledButton width={'100%'} text={'생성하기'} fontSize={'1.25rem'} fontWeight={'700'} color={'white'} btnColor={'var(--main-color)'} handleOnClick={() => handleSubmit} />
+                <IconStyledButton width={'100%'} text={'생성하기'} fontSize={'1.25rem'} fontWeight={'700'} color={'white'} btnColor={'var(--main-color)'} handleOnClick={handleSubmit} />
               </ButtonWrapper>
             </Main>
           </Wrapper>

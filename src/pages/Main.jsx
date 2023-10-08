@@ -1,17 +1,27 @@
+import React, {useState} from 'react'
 import MainExperience from '../components/MainExperience';
 import { usePlay } from '../contexts/Play';
 import { Canvas } from "@react-three/fiber";
-import { ScrollControls, Box } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
 import MapOverlay from '../components/MapOverlay';
+import SettingModal from '../components/SetUp/SettingModal';
 import { Overlay } from './Overlay';
+import {ReactComponent as SettingIcon} from '../assets/icons/setting_icon.svg'
+import {ReactComponent as MapModalButton} from '../assets/img/map_modal_btn.svg'
+import styled from 'styled-components';
 
 
-
-function Main() {
+export default function Main() {
+  const [showSetup, setShowSetup] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const {play, end} = usePlay();
-  
+
   return (
   <>
+    <Header onClick={() => setShowSetup(!showSetup)}>
+      <SettingIcon/>
+    </Header>
+
     <Canvas>
       <color attach="background" arg={["#f59f9f"]} />
       <ScrollControls
@@ -21,11 +31,26 @@ function Main() {
       <MainExperience />
       </ScrollControls>
     </Canvas>
+
     <Overlay/>
-    <MapOverlay/>
-    
+    <MapButtonWrapper>
+      <MapModalButton />
+    </MapButtonWrapper>
+    <MapOverlay showMap={showMap} setShowMap={setShowMap} />
+    <SettingModal showSetup={showSetup} setShowSetup={setShowSetup} />
   </>
   );
 }
 
-export default Main;
+const Header = styled.div`
+  position: absolute;
+  top: 3.75rem;
+  right: 3rem;
+  z-index: 999;
+`
+
+const MapButtonWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+`

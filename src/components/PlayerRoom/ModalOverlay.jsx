@@ -11,8 +11,6 @@ import Board from './MainModalContent/Board';
 import Shelf from './MainModalContent/Shelf/Shelf';
 
 export default function ModalOverlay({curIdx, setCamera}) {
-
-  const modalRef = useRef();
   const {setFocus} = usePlay()
   const [comp, setComp] = useState()
 
@@ -48,9 +46,9 @@ export default function ModalOverlay({curIdx, setCamera}) {
       <img src={title} />
       <CloseModal onClick={handleClick}/>
     </Header>
-    <div ref={modalRef}>
+    <MainComp>
       {comp}
-    </div>
+    </MainComp>
   </Overlay>
   )
 }
@@ -62,10 +60,7 @@ const Overlay = styled.div`
   left:0;
   right:0;
   text-align: center;
-  justify-content: center;
   background-color: #1C1717B2;
-  height: 100vh;
-
   &{
     z-index: 999;
   }
@@ -75,8 +70,11 @@ const Overlay = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 3.75rem 6.25rem;
+  padding: 3.75rem 6.25rem 1rem 6.25rem;
   img{
     width: 11.25rem;
   }
+`
+const MainComp = styled.div`
+  height: 100%:
 `

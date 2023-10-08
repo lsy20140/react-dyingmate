@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import splashBg from '../assets/img/splashBg.png'
 import title from '../assets/img/title.png'
 import styled from 'styled-components'
 import LoginSignup from './LoginSignup'
-import MapOverlay from '../components/MapOverlay'
-import Setting from '../components/SetUp/Setting'
 
 export default function Splash() {
-  const [showSetup, setShowSetup] = useState(false);
-  const [showMap, setShowMap] = useState(true);
-
   return (
     <>
-      <Header onClick={() => setShowSetup(!showSetup)}>
-        {/* <IconSetting/> */}
-      </Header>
       <SplashContainer>
         <ContentBox>
           <Description>
@@ -26,18 +18,9 @@ export default function Splash() {
           <LoginSignup/>
         </ContentBox>
       </SplashContainer>
-      <MapOverlay showMap={showMap} setShowMap={setShowMap}/>
-      {/* <Setting/> */}
     </>
   )
 }
-
-
-const Header = styled.div`
-  position: absolute;
-  top: 3.75rem;
-  right: 3rem;
-`
 
 const SplashContainer = styled.div`
   width: 100%;

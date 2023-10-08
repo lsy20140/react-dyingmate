@@ -80,6 +80,5 @@ const PostWrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  padding-top: 4rem;
-  padding-left: 5rem; 
+  box-sizing: border-box;
 `

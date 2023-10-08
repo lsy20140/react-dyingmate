@@ -5,7 +5,7 @@ import {IoIosClose} from 'react-icons/io'
 import {LuPencilLine, LuLogIn, LuRotateCcw} from 'react-icons/lu'
 import IconStyledButton from '../ui/IconStyledButton'
 
-export default function Setting() {
+export default function SettingModal({showSetup, setShowSetup}) {
 
   const handleOnClick = (e) => {
     // 1. 에러 방지 팝업 보여주기
@@ -13,29 +13,34 @@ export default function Setting() {
   }
 
   return (
-    <Overlay>
-      <Container>
-        <Header>
-          <HeaderTitle>
-            <MainIcon/>
-            <p>환경설정</p>
-          </HeaderTitle>
-          <IoIosClose/>
-        </Header>
-        <ContentWrapper>
-          <ProfileBox>
-            {/* 이미지 추가 */}
-            <ProfileImg /> 
-            <p>워리어즈 님,</p>
-            <IconStyledButton width={'100%'} text={'닉네임 수정하기'} fontWeight={'700'} color={'white'} btnColor={`var(--main-color-2)`} icon={<LuPencilLine fontSize='1.5rem'/>} handleOnClick={handleOnClick} />
-          </ProfileBox>
-          <ButtonWrapper>
-            <IconStyledButton width={'100%'} text={'로그아웃'} fontWeight={'500'} color={'white'} btnColor={`var(--main-color)`} icon={<LuLogIn fontSize='1.5rem'/>} handleOnClick={handleOnClick} />
-            <IconStyledButton width={'100%'} text={'초기화하기'} fontWeight={'500'} color={`var(--font-gray-3)`} btnColor={'#F0EAE0'} icon={<LuRotateCcw fontSize='1.5rem'/>} handleOnClick={handleOnClick} />
-          </ButtonWrapper>
-        </ContentWrapper>
-      </Container>
-    </Overlay>
+    <>
+    {showSetup && (
+      <Overlay>
+        <Container>
+          <Header>
+            <HeaderTitle>
+              <MainIcon/>
+              <p>환경설정</p>
+            </HeaderTitle>
+            <IoIosClose onClick={() => setShowSetup(!showSetup)}/>
+          </Header>
+          <ContentWrapper>
+            <ProfileBox>
+              {/* 이미지 추가 */}
+              <ProfileImg /> 
+              <p>워리어즈 님,</p>
+              <IconStyledButton width={'100%'} text={'닉네임 수정하기'} fontWeight={'700'} color={'white'} btnColor={`var(--main-color-2)`} icon={<LuPencilLine fontSize='1.5rem'/>} handleOnClick={handleOnClick} />
+            </ProfileBox>
+            <ButtonWrapper>
+              <IconStyledButton width={'100%'} text={'로그아웃'} fontWeight={'500'} color={'white'} btnColor={`var(--main-color)`} icon={<LuLogIn fontSize='1.5rem'/>} handleOnClick={handleOnClick} />
+              <IconStyledButton width={'100%'} text={'초기화하기'} fontWeight={'500'} color={`var(--font-gray-3)`} btnColor={'#F0EAE0'} icon={<LuRotateCcw fontSize='1.5rem'/>} handleOnClick={handleOnClick} />
+            </ButtonWrapper>
+          </ContentWrapper>
+        </Container>
+      </Overlay>
+    )}
+    </>
+
   )
 }
 

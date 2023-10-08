@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {ReactComponent as FriendModalIcon} from '../../../assets/icons/PlayerRoom/friend_modal.svg'
 
 export default function ModalButton() {
   return (

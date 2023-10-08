@@ -14,16 +14,12 @@ export default function MapOverlay({showMap, setShowMap}) {
     {id: 4,  isClear: false, stageTitle: '마지막 이야기', stageImg: TestImage, path: '/final'},
   ]
 
-  const handleModal = () => {
-    setShowMap(!showMap)
-  }
-
   return (
     <>
       {showMap && (
         <Overlay>
           <Header>
-            <CloseModal onClick={handleModal}/>
+            <CloseModal onClick={() => setShowMap(!showMap)}/>
           </Header>
           <Main>
             <MapItemWrapper>
@@ -37,7 +33,6 @@ export default function MapOverlay({showMap, setShowMap}) {
         )
       }
     </>
-
   )
 }
 
