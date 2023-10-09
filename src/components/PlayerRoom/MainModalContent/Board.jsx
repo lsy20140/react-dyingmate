@@ -1,21 +1,43 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BoardSrc4 from '../../../assets/img/PlayerRoom/boardSrc4.png'
 import BoardSrc5 from '../../../assets/img/PlayerRoom/boardSrc5.png'
 import NewTextPost from './Board/NewTextPost'
 import NewImagePost from './Board/NewImagePost'
 import AddPostModal from './Board/AddPostModal'
+import { getAllBucketlist } from '../../../apis/api/PlayerRoom/bucketlist'
 
 export default function Board() {
   const [openModal, setOpenModal] = useState(false)
+  const [posts, setAllPosts] = useState([])
+  const [isImagePost, setIsImagePost] = useState(false)
+
+  useEffect(() => {
+    getAllBucketlist()
+    .then((res) => {
+      console.log("getAllBucketlist", res.data)
+      res.data.map((item) => setAllPosts([...posts, item]))
+      console.log(posts)
+    }).catch(function (error) {
+      // 오류발생시 실행
+      console.log(error.message)
+    })
+  },[])
+
+  const handleOnClick = (isImagePost) => {
+    setOpenModal(true)
+    setIsImagePost(isImagePost)
+    console.log("isImagePost", isImagePost)
+    console.log("openModal", openModal)
+  }
 
   return (
     <>
       <Container>
         <BoardContainer>
           <NewPostWrapper>
-            <NewTextPost handleOnClick={() => setOpenModal(true)}/>
-            <NewImagePost />
+            <NewTextPost handleOnClick={() => handleOnClick(false)}/>
+            <NewImagePost handleOnClick={() => handleOnClick(true)} />
             <NewTextPost />
           </NewPostWrapper>
           <PostWrapper>
@@ -23,9 +45,7 @@ export default function Board() {
           </PostWrapper>
         </BoardContainer>
       </Container>
-      {openModal && <AddPostModal setOpenModal={setOpenModal}/>}
-      
-      
+      {openModal && <AddPostModal isImagePost={isImagePost} setOpenModal={setOpenModal}/>}
     </>
   )
 }
