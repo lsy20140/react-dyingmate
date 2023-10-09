@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import {ReactComponent as Pin} from '../../../../assets/img/PlayerRoom/pin.svg'
 import PostImageSrc from '../../../../assets/img/PlayerRoom/post_image.png'
 
-export default function NewImagePost() {
+export default function NewImagePost({handleOnClick}) {
   return (
-    <PostItem>
+    <PostItem onClick={handleOnClick}>
       <HeaderPin><Pin/></HeaderPin>
       <PostImage />
     </PostItem>

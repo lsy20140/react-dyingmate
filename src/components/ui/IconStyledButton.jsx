@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function IconStyledButton({width, text, fontWeight, color, btnColor, icon, handleOnClick}) {
+export default function IconStyledButton({width, text, fontSize, fontWeight, color, btnColor, icon, handleOnClick}) {
   const ButtonStyle = {
     width: `${width}`,
     color: `${color}`,
@@ -12,7 +12,7 @@ export default function IconStyledButton({width, text, fontWeight, color, btnCol
     display: 'flex',
     gap: '0.75rem',
     justifyContent: 'center',
-
+    fontSize:`${fontSize}`,
   }
 
   return (
