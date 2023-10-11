@@ -25,12 +25,17 @@ export default function AddPostModal({isImagePost, setOpenModal}) {
     console.log("post", post)
   }
 
-  const handleSubmit = (e) => {
+  const closeModal = () => {
+    setOpenModal(false)
+  }
+
+  const handleSubmit = async (e) => {
     for ( const key in post ) {
       formData.append(key, post[key]);
     }
-    console.log("formData",formData)
-    axios
+    console.log("formData", formData)
+    closeModal()
+    await axios
     .post('/api/bucketlist/add', formData, {
       headers: {
         'Content-Type' : 'multipart/form-data',
@@ -40,10 +45,10 @@ export default function AddPostModal({isImagePost, setOpenModal}) {
     })
     .then((response) => {
       console.log(response)
-        
+      
     }).catch(function (error) {
         // 오류발생시 실행
-        console.log(error.message)
+      console.log(error.message)
     })
   }
 

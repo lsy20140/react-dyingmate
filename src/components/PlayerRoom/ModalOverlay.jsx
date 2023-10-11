@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { usePlay } from '../../contexts/Play';
 import { ReactComponent as CloseModal } from '../../assets/icons/close_modal.svg'
-import title from '../../assets/img/title.png'
+import {ReactComponent as TitleSrc} from '../../assets/img/title.svg'
 
 import Will from '../PlayerRoom/MainModalContent/Will'
 import Phone from '../PlayerRoom/MainModalContent/Phone'
@@ -43,7 +43,7 @@ export default function ModalOverlay({curIdx, setCamera}) {
   return (
     <Overlay>
     <Header>
-      <img src={title} />
+      <TitleSrc />
       <CloseModal onClick={handleClick}/>
     </Header>
     <MainComp>
@@ -71,8 +71,14 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 3.75rem 6.25rem 1rem 6.25rem;
-  img{
+  svg:first-child{
     width: 11.25rem;
+    height: 3.5rem;
+  }
+
+  svg:last-child{
+    width: 3rem;
+    height: 3rem;
   }
 `
 const MainComp = styled.div`

@@ -5,7 +5,6 @@ import google_icon from '../../assets/icons/google_icon.png'
 import kakao_icon from '../../assets/icons/kakao_icon.png'
 import hide_icon from '../../assets/icons/hide_icon.png'
 import axios from 'axios'  
-import { useAuthContext } from '../../contexts/AuthContext';
 import {GoCheckCircleFill} from 'react-icons/go'
 import {IoMdAlert} from 'react-icons/io'
 
@@ -17,7 +16,6 @@ export default function SignUpForm() {
   const [checkPwd, setCheckPwd] = useState()
   const [showPwd, setShowPwd] = useState([])
   const [isEmailValid, setIsEmailValid] = useState(null)
-  const {token} = useAuthContext()
 
   // const handleChange = (e) => {
   //   const {name, value} = e.target
@@ -60,7 +58,10 @@ export default function SignUpForm() {
       {withCredentials: true},
     )
     .then((res) => {
-      if(res.status === 200){
+      if(!res.data){
+        return;
+      }
+      else{
         navigate('/onboarding',{state: {email: email, pwd: pwd}})
       }
         

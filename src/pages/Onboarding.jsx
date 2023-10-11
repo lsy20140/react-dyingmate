@@ -57,10 +57,6 @@ export default function Onboarding() {
   },[])
   
   const handleDiaglogBox = () => {
-    if(curIdx === DiaglogArr.length-1){
-      navigate('/main')
-      return;
-    }
     setCurIdx(curIdx+1);
   }
 
@@ -68,9 +64,9 @@ export default function Onboarding() {
     setUserName(e.target.value);
   }
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault()
-    axios
+    await axios
     .post(`/api/user/${userName}/save`, {}, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -79,6 +75,7 @@ export default function Onboarding() {
     })
     .then((response) => {
       console.log(response)
+      navigate('/main')
         
     }).catch(function (error) {
         // 오류발생시 실행

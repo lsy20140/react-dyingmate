@@ -90,11 +90,11 @@ export default function PlayerRoom() {
       <Canvas camera={{position:[20,8,0]}} colorManagement>
         {/* <LightHelper /> */}
         <axesHelper args={[200, 200, 200]} />
-        <ambientLight intensity={0.1} />
-        <directionalLight ref={light1} intensity={1}  decay={2} color="#eca864" position={[ 17, 12.421, -2]} target-position={[0, 9, 2]} />
-        <directionalLight ref={light2} intensity={1} castShadow decay={2} color="#d8b58d" position={[22, 15.344, -5]} target-position={[2, 10, 0]} />
+        <ambientLight intensity={5} />
+        <directionalLight ref={light1} intensity={5}  decay={2} color="#eca864" position={[ 17, 12.421, -2]} target-position={[0, 9, 2]} />
+        <directionalLight ref={light2} intensity={5} castShadow decay={2} color="#d8b58d" position={[22, 15.344, -5]} target-position={[2, 10, 0]} />
         <CameraControls position={position} target={target} />
-        <group rotation-y={-Math.PI}>
+        <group rotation-y={-Math.PI} >
           <Room/>
           <group onClick={() => handleClick(1)}>
             <WillPaper/>

@@ -28,8 +28,13 @@ const CircleWrapper = styled.div`
 
   outline: 2px solid white; 
   position: relative;
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-radius: 100%;
+
+  svg {
+    width: 3rem;
+    height: 3rem;
+  }
 `
 
 const RequestCount = styled.div`
@@ -38,8 +43,8 @@ const RequestCount = styled.div`
   border-radius: 100%;
   background-color: #39375C;
   position: absolute;
-  top: 0.05rem;
-  right: 0.05rem;
+  top: -0.5rem;
+  right: 0;
   font-size: 1.25rem;
   color: white;
   text-align: center;
